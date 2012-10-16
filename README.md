@@ -1,10 +1,7 @@
-Swarm Intelligence
-==================
-
+#Swarm Intelligence
 Autoři: Gerardo Beni a Jing Wang (1989)
 
-Zdroje informací
-----------------
+##Zdroje informací
 Obecné: http://faculty.washington.edu/paymana/swarm/
 * **Swarm Intelligence: Literature Overview**:
   http://pdf.aminer.org/000/352/063/optimization_of_group_behavior_on_cellular_robotic_system_in_dynamic.pdf
@@ -24,22 +21,46 @@ Obecné: http://faculty.washington.edu/paymana/swarm/
 * **Ant Colony Optimization – Artificial Ants as a Computational Intelligence Technique (2006)**:
   http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.70.1052
   hezký průřez tematikou ACO, aplikace na TSP a NP-hard problémy, hezká definice Ant systému.
+* **A Taxonomy for Swarm Robots**:
+  http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=583135
+  obecně o tématu swarm robots
 
 
-Přístupy a využití
--------------------
+##Obecný úvod do problematiky
+###Definice pojmů
+* *Samoorganizace*
+* *Emergentní jev*
+* *Kolektivní inteligence*
+* *Schopnost adaptace, robustnost*
+* *Evaluace (vyhodnocení) swarm systémů*
+
+###Pozorování hmyzu v přírodě
+* pozorování sociálního hmyzu (mravenci, včely, atp.)
+* mechanismy pro řešení problémů
+* feromony, vypařování
+* komunikace a interakce mezi hmyzem (resp. agenty)
+
+
+##Přístupy
 * Swarm
 * Multi-swarm optimization
 * Swarm robotics
+** celulární robotické systémy (Cellular robotic systems)
+** učení a adaptační strategie robotů
 
-Algoritmy
----------
+##Algoritmy
 * Ant colony optimization (ACO)
 * Artificial bee colony algorithm (ABC)
 * Glowworm Swarm Optimization (GSO)
 * Particle Swarm optimization (PSO) - http://www.swarmintelligence.org/
 
 
-Aplikace
---------
-* ?
+##Aplikace
+* optimalizace (např. v telekomunikačních systémech)
+* robotika
+  * flexibilní výrobní systémy
+  * inspekční a provozní systémy
+  * zemědělství
+  * medicína
+* provoz v přepravních systémech (kooperativní transport)
+* vojenství
