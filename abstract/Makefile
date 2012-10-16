@@ -1,6 +1,6 @@
 
 
-SOURCE=sin2012_abstract_xkimer00_xhelle03.tex
+SOURCE=sin2012_abstract_xkimer00_xhelle03
 
 all:
 	pdflatex $(SOURCE)
