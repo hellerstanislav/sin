@@ -24,7 +24,7 @@ Obecné: http://faculty.washington.edu/paymana/swarm/
 * **A Taxonomy for Swarm Robots**:
   http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=583135
   obecně o tématu swarm robots
-
+* **Swarm Intelligence - Introduction and Applications** - http://www.springerlink.com/content/978-3-540-74089-6#section=226923&page=7&locus=23
 
 ##Obecný úvod do problematiky
 ###Definice pojmů
@@ -45,8 +45,8 @@ Obecné: http://faculty.washington.edu/paymana/swarm/
 * Swarm
 * Multi-swarm optimization
 * Swarm robotics
-** celulární robotické systémy (Cellular robotic systems)
-** učení a adaptační strategie robotů
+  * celulární robotické systémy (Cellular robotic systems)
+  * učení a adaptační strategie robotů
 
 ##Algoritmy
 * Ant colony optimization (ACO)
