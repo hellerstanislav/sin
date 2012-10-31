@@ -4,32 +4,85 @@
 \usepackage[pdftex]{graphicx}
 \usepackage[utf8]{inputenc}
 
-\usepackage{fancyvrb}
 \usepackage{wrapfig}
 \usepackage{verbatim} 
-
-
-\setlength{\hoffset}{-1.8cm} % 1.7
-\setlength{\voffset}{-2.5cm} % 2
-\setlength{\textheight}{25.3cm} 
-\setlength{\textwidth}{17.4cm}
-
-\DefineShortVerb{\|}
+\usepackage[unicode]{hyperref}
 
 \usepackage[font=small,labelfont=bf,tableposition=top]{caption}
 \DeclareCaptionLabelFormat{andtable}{#1~#2  \&  \tablename~\thetable}
 
 \newcommand{\HRule}{\rule{\linewidth}{0.2mm}}
 
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
 
 \begin{document}
 
+% Uvodni strana
 \input{./title.tex}
 
+% Obsah
+\tableofcontents
+
+% Text
 \section{Úvod}
+\begin{itemize}
+  \item Obecné kecy o tom, k čemu to je, čím je to inspirováno atp.
+  \item Zasazení do rámce s agenty a roboty
+  \item blabla
+\end{itemize}
+
+\subsection{Pozorování hmyzu v přírodě}
+\begin{itemize}
+  \item pozorování sociálního hmyzu (mravenci, včely, atp.)
+  \item mechanismy pro řešení problémů
+  \item feromony, vypařování
+  \item komunikace a interakce mezi hmyzem (resp. agenty)
+\end{itemize}
 
 
-\renewcommand{\refname}{\section{Použitá literatura}}
-\input{./bibliography.tex}
+\subsection{Možnosti využití}
+Kecy o tom, jak je možné swarm využít v:
+\begin{itemize}
+  \item telekomunikační systémy (optimalizace)
+  \item robotika - výrobní, provozní a inspektční systémy, zemědělství, medicína
+  \item logistika, kooperativní transport
+  \item vojenství
+\end{itemize}
+
+
+
+\section{Definice základních pojmů}
+\begin{itemize}
+  \item Samoorganizace 
+  \item Emergentní jev
+  \item Kolektivní inteligence
+  \item Schopnost adaptace
+\end{itemize}
+
+
+\section{Inteligence roje v optimalizaci}
+
+
+
+
+\section{Hejna robotů}
+Oblast, která je v odborné literatuře označována jako {\it Swarm Robotics} je jednou z...
+\cite{fleischer2005}
+
+
+
+
+\section{Další přístupy a metody}
+\begin{itemize}
+  \item cellular robotic systems, učení a adaptační strategie
+  \item chaos \& swarm
+\end{itemize}
+
+%\renewcommand{\refname}{\section{Použitá literatura}}
+
+%\bibliographystyle{czechiso}
+\bibliographystyle{plain}
+\bibliography{refs}
 
 \end{document}
