@@ -1,0 +1,35 @@
+
+\documentclass[a4paper,12pt]{article}
+\usepackage[czech]{babel}
+\usepackage[pdftex]{graphicx}
+\usepackage[utf8]{inputenc}
+
+\usepackage{fancyvrb}
+\usepackage{wrapfig}
+\usepackage{verbatim} 
+
+
+\setlength{\hoffset}{-1.8cm} % 1.7
+\setlength{\voffset}{-2.5cm} % 2
+\setlength{\textheight}{25.3cm} 
+\setlength{\textwidth}{17.4cm}
+
+\DefineShortVerb{\|}
+
+\usepackage[font=small,labelfont=bf,tableposition=top]{caption}
+\DeclareCaptionLabelFormat{andtable}{#1~#2  \&  \tablename~\thetable}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.2mm}}
+
+
+\begin{document}
+
+\input{./title.tex}
+
+\section{Úvod}
+
+
+\renewcommand{\refname}{\section{Použitá literatura}}
+\input{./bibliography.tex}
+
+\end{document}
