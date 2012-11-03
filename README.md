@@ -25,6 +25,8 @@ Obecné: http://faculty.washington.edu/paymana/swarm/
   http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=583135
   obecně o tématu swarm robots
 * **Swarm Intelligence - Introduction and Applications** - http://www.springerlink.com/content/978-3-540-74089-6#section=226923&page=7&locus=23
+* **From Swarm Intelligence to Swarm Robotics** - http://www.springerlink.com/content/xn02ymel1b22rjp8/
+
 
 ##Obecný úvod do problematiky
 ###Definice pojmů
