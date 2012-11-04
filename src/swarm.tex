@@ -31,15 +31,19 @@
 % Obsah
 \tableofcontents
 
-% Text
+
+% -----------------------------------------------------------------------------
+% UVOD
+% -----------------------------------------------------------------------------
+
 \section{Úvod}
 Pro tuto kapitolu se bude výborně čerpat z \cite{Blum08SwarmInt} \\
 \url{http://www.springerlink.com/content/978-3-540-74089-6#section=226923&page=7&locus=23}
 
 \begin{itemize}
-  \item Obecné kecy o tom, k čemu to je, čím je to inspirováno atp.
-  \item Zasazení do rámce s agenty a roboty
-  \item blabla
+  \item obecné kecy o tom, k čemu to je, čím je to inspirováno atp.
+  \item zasazení do rámce s agenty (multiagentními systémy) a roboty
+  \item chtělo by to tady úvod typu jako je v Literature Overview (Yang Liu, Kevin M. Passino)
 \end{itemize}
 
 \subsection{Biologický základ inteligence roje}
@@ -52,7 +56,6 @@ a z \cite{fleischer2005}, kapitola II/a Observations of Social Insects.
   \item komunikace a interakce mezi hmyzem (resp. agenty)
 \end{itemize}
 
-
 \subsection{Možnosti využití}
 Kecy o tom, jak je možné swarm využít v:
 \begin{itemize}
@@ -64,6 +67,10 @@ Kecy o tom, jak je možné swarm využít v:
 
 
 
+% -----------------------------------------------------------------------------
+% ZAKLADNI POJMY
+% -----------------------------------------------------------------------------
+
 \section{Definice základních pojmů}
 \begin{itemize}
   \item Samoorganizace (\cite{fleischer2005})
@@ -73,15 +80,20 @@ Kecy o tom, jak je možné swarm využít v:
 \end{itemize}
 
 
+
+% -----------------------------------------------------------------------------
+% OPTIMALIZACE (ACO, PSO, GWO atp.)
+% -----------------------------------------------------------------------------
+
 \section{Inteligence roje v optimalizaci}
 Obecné kecy o optimalizaci...
 
 \subsection{Optimalizace mravenčí kolonií}
-Pro algoritmy typu ACO bude vhodné využít \cite{Dorigo06antcolony}
+Pro algoritmy typu ACO bude vhodné využít \cite{Dorigo06antcolony}.
 
 \subsection{Optimalizace hejnem částic}
-Tady se bude brát hlavně z \cite{Blum08SwarmOpt} a také třeba
-z \cite{Blum08SwarmInt}, kapitola Swarm Intelligence in Optimization.
+Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
+
 
 
 
@@ -249,6 +261,14 @@ pak v případě zájmu ponecháváme již na případném čtenáři. \cite{Dud
 
 
 \subsection{Návrh a modelování}
+Základním problémem při návrhu swarmových robotických systémů je určení konceptu
+lokální komunikace mezi roboty tak, aby hejno vykazovalo požadované chování. Dalším
+problémem je pak návrh vlastního fyzického zpracování robotů s ohledem na úkoly, které
+mají společně plnit. V obecné rovině zatím neexistuje obecný postup či metodika pro návrh
+takových systémů. Přístupy, které jsou dnes uplatňovány, by se daly rozdělit na dva
+hlavní směry:\\
+{\it Ad-hoc přístupy.} TODO \\
+{\it Principielní přístupy.} TODO \\
 
 
 \subsection{Příklady reálných systémů založených na robotice hejna}
@@ -257,6 +277,7 @@ pak v případě zájmu ponecháváme již na případném čtenáři. \cite{Dud
 
 
 \section{Další přístupy a metody}
+FIXME: budeme toto vůbec dělat? Myslím, že i tak toho budeme mít dost.
 \begin{itemize}
   \item cellular robotic systems, učení a adaptační strategie
   \item chaos \& swarm
