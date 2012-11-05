@@ -88,13 +88,14 @@ Kecy o tom, jak je možné swarm využít v:
 \section{Inteligence roje v optimalizaci}
 Obecné kecy o optimalizaci...
 
-\subsection{Optimalizace mravenčí kolonií}
+\subsection{Optimalizace mravenčí kolonií (ACO)}
 Pro algoritmy typu ACO bude vhodné využít \cite{Dorigo06antcolony}.
 
-\subsection{Optimalizace hejnem částic}
+\subsection{Optimalizace hejnem částic (PSO)}
 Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
 
-
+\subsection{Stochastic diffusion search (SDS)}
+\url{http://en.wikipedia.org/wiki/Stochastic_diffusion_search}
 
 
 % -----------------------------------------------------------------------------
@@ -150,26 +151,26 @@ Protože je oblast robotiky hejna poměrně nová a zatím neexistují unifikova
 pro návrh, implementaci a ladění robotických swarmů, není jejich komerční využití
 příliš rozšířené. Mezi základní oblasti využití patří:
 \begin{itemize}
-  \item výrobní, provozní a inspektční systémy
+  \item výrobní, provozní a inspekční systémy
   \item logistika, kooperativní transport
-  \item vojenství
+  \item vojenství (průzkum, robotický transport v neznámém prostředí)
   \item zemědělství
-  \item medicína
+  \item medicína (mikrorobotika, kostní scintigrafie\cite{Rifaie11})
 \end{itemize}
 
 
 \subsection{Klasifikace a vlastnosti hejna robotů}
 Hejno robotů můžeme klasifikovat podle různých úhlů pohledu na vlastnosti
 či chování hejna \cite{Dudek93}:
-\begin{description}
-  \item[Velikost hejna] {- počet robotů, kteří se pohybují v daném prostředí a tvoří hejno.}
-  \item[Komunikační dosah] {- ve většině systémů existují limity, které omezují
+\begin{itemize}
+  \item {\bf Velikost hejna} {- počet robotů, kteří se pohybují v daném prostředí a tvoří hejno.}
+  \item {\bf Komunikační dosah} {- ve většině systémů existují limity, které omezují
      možnosti komunikace robotů. Hlavním omezením je vzdálenost, na kterou mohou
      roboti komunikovat. Dalším faktorem může být schopnost adresace informace
      jinému robotovi, či všem robotům. Problémem může být také objem přenášených dat.}
-  \item[Rekonfigurace] {- míra schopnosti hejna změnit svoji topologii. Hejno může být buď
+  \item {\bf Rekonfigurace} {- míra schopnosti hejna změnit svoji topologii. Hejno může být buď
      statické (jedna topologie) a nebo dynamické, kde vztahy mezi jedinci se může měnit.}
-  \item[Výpočetní schopnost jedince] {- každý jedinec z hejna má určitou výpočetní schopnost
+  \item {\bf Výpočetní schopnost jedince} {- každý jedinec z hejna má určitou výpočetní schopnost
      odpovídající modelům, které jsou známé z teoretické informatiky. Můžeme tedy rozeznávat
      velmi jednoduché jedince, které pracují jako nelinární sumační jednotka - tyto jednotky
      pak mohou bý využity pro výstavbu a simulaci neronové sítě, ale obecně je tento model
@@ -178,7 +179,7 @@ Hejno robotů můžeme klasifikovat podle různých úhlů pohledu na vlastnosti
      u systémy se subsumpční architekturou). Další úrovní je zásobníkový automat, který není
      v robotice tak běžný a konečně turingův stroj, což je výpočetní model používaný dnes
      většinou robotických systémů.}
-\end{description}
+\end{itemize}
 
 \subsubsection{Vlastnosti systému}
 Pokud se díváme na robotické hejno jako na systém, musí splňovat tyto vlastnosti,
@@ -213,12 +214,13 @@ absence fyzické realizace zmiňovány. Těmito požadavky jsou:
     a ladění robotů.
   \item {\bf Fyzická interakce.} Roboti by měli umět fyzicky interagovat ve smyslu využití
     fyzických schopností svých i cizích pro dosažení určitého cíle (např. skládáním robotů
-    do většího a silnějšího celku).
+    do většího a silnějšího celku). Lze nahlédnout, že v některých aplikacích musí být robot
+    dostatečně silný, aby dokázal druhého robota odtáhnout nebo aby jej dokázal nadzvednout.
   \item {\bf Výdrž.} Kvůli požadavku na vysokou flexibilitu robotů ve swarmu, by mělo být
     napájení realizováno pomocí výkonných baterií. Spotřeba robotů při plnění některých
     fyzických úloh může být poměrně vysoká, proto je třeba vzít tento fakt v úvahu.
   \item {\bf Velikost robota.} V některých systémech může být kladen důraz na velikost robota.
-    Ta je vždy kompromisem; miniaturizace může být v některých případech velmi nákladná,
+    Ta je vždy kompromisem; miniaturizace\ref{fig:jasmine} může být v některých případech velmi nákladná,
     naopak přílišné zmenšení systému je v protikladu s případnou rozšířitelností funkcionality
     robota.
   \item {\bf Simulovatelnost.} Vývoj robotického swarmu bez použití technik modelování
@@ -227,20 +229,26 @@ absence fyzické realizace zmiňovány. Těmito požadavky jsou:
     schopnosti robotů.
 \end{itemize}
 
+\begin{figure}[here]
+  \centering
+  \includegraphics[width=7cm]{./img/jasmine.png}
+  \caption{Miniaturizace robota pro swarm - na obrázku robot Jasmine s rozměry přibližně
+    30x30x20mm. Zdroj: \url{http://www.swarmrobot.org/}}
+  \label{fig:jasmine}
+\end{figure}
+
+
 \subsubsection{Koordinační mechanismy}
 V přírodě nalezneme množství koordinačních mechanismů, které byly inspirací pro robotiku.
 Uveďme tedy alespoň dva hlavní principy koordinace uvnitř swarmu.
-\begin{description}
-  \item[Samoorganizace] {je v přírodních systémech běžná. Základním předpokladem pro
+\paragraph{Samoorganizace} {je v přírodních systémech běžná. Základním předpokladem pro
     výskyt jevů, které shrnujeme pod označení samoorganizace, je pozitivní a negativní
     odezva při lokální interakci jedinců \cite{Bonabeau99}. Dalším předpokladem je také
-    existence náhody, která se v přírodě vyskytuje ve formě nepravidelností, mutací, či
-    jiných jevech.}
-  \item[Stigmergie] {je naopak mechanismem, který předpokládá nepřímou komunikaci
+    existence náhody, která se v přírodě vyskytuje ve formě nepravidelností a mutací.}
+\paragraph{Stigmergie} {je naopak mechanismem, který předpokládá nepřímou komunikaci
     mezi jedinci přes prostředí. Příkladem stigmergické komunikace je zanechávání feromonů
-    na zemi; mravenci tímto způsobem označují cesty k potravě a tyto feromony pak pusobí
+    na zemi; mravenci tímto způsobem označují cesty k potravě a tyto feromony pak působí
     jako atraktory.}
-\end{description}
 
 \subsubsection{Výpočetní schopnost robotického swarmu}
 Robotické hejno se řadí do kategorie distribuované inteligence. Z pohledu teoretické
@@ -260,18 +268,108 @@ posun čtecí hlavy doprava, doleva či přepis symbolu na pásce. Prostudován�
 pak v případě zájmu ponecháváme již na případném čtenáři. \cite{Dudek93}
 
 
+\subsection{Typické problémy řešitelné hejny robotů}
+Přestože komerční výroba systémů založených na robotice hejna není zatím příliš rozšířená
+a výzkum probíhá spíše na akademických půdách a v laboratořích, jsou již známy úlohy,
+které jsou pomocí těchto systémů řešitelné. Využitelnost robotického swarmu se pohybuje
+v~oblastech, které jsou inspirovány přírodou. Tyto oblasti můžeme rozdělit na jisté {\it modely
+chování}, jejichž zvládnutí pak představuje základ pro řešení složitějších úkolů a problémů.
+
+\paragraph{Agregace} je obecný úkaz, kdy se jedinci seskupují do shluků, které mohou mít jistá
+pravidla. Shlukování probíhá bez jakýchkoliv vodítek okolí a bez koordinace třetí stranou.
+V robotice hejna se jedná o jeden z~nejdůležitějších modelů chování, ze kterého pak vychází
+různé způsoby řešení problémů.
+\paragraph{Disperze} (někdy označována jako segregace) je opakem agregace. Cílem u disperzního
+swarmu je dosažení maximální plochy pokryté roboty tak, aby zůstávali stále ve spojení. Příkladem
+takového chování jsou sami lidé, kteří tvoří "roje" když prohledávají hůře prostupný terén při
+pátrání po nezvěstných nebo pohřešovaných osobách. Využitelnost robotického swarmu je nasnadě:
+tuto práci by mohla převzít specializovaná hejna robotů, která by tyto osoby vyhledávala. Dalším
+možným způsobem využití disperze je při předávání informací na velkou vzdálenost, kdy signál
+od jednoho robota ke druhému nestačí (např. přenos informace na kilometry).
+\paragraph{Vytváření vzorů} představuje obecný problém, který lze definovat jako vytváření
+požado-vaných geometrických obrazců a vzorů pomocí hejna robotů bez centralizované koordinace.
+Toto chování není pouze geometrické, ale může být velmi funkční - v přírodě se vyskytuje například
+ve formě vytvoření kruhovitého vzoru pro obklíčení kořisti skupinou predátorů.\\
+
+Z těchto behaviorálních modelů\footnote{K těmto modelům lze ještě přiřadit pohyb propojených
+robotů {\it (Connected Movement)}, který lze v některých případech považovat za jistý druh agregace.}
+vychází problémy, které jsou řešitelné pomocí robotického swarmu \cite{Blum08SwarmInt}[96-97]:
+\begin{itemize}
+  \item {\bf Hledání zdrojů} {\it (Foraging)} lze zařadit do oblasti disperzního chování,
+    což však není zcela přesné, protože většina přístupů pro vyhledávání (např. potravy)
+    je založena na stigmergické komunikaci.
+  \item {\bf Skládání} {\it (Self-assembly)} je úkaz pozorovaný u mravenců, kteří vytváření
+    řetězcovité formace, pomocí kterých vytváří "mosty", aby zůstali nad vodou. Problém skládání
+    je nejčastěji řešen pomocí robotických chapadel nebo jiných mechanismů pro úchop a držení
+    části dalšího robota. Skládání je typickým příkladem agregačního chování robotů.
+  \item {\bf Kooperativní transport} {\it (Cooperative transport)} je jedním z nejzjevnějších
+    druhů kooperativní inteligence pozorovaných u mravenců. Ti dokáží spojit své síly a
+    transportovat tak k mraveništi kořist, která je mnohonásobně větší a těžší, než jeden
+    mravenec. Principy kooperativního transportu spadají pod oblast agregačního chování hejna.
+  \item {\bf Samoorganizovaná konstrukce} {\it (Self-organized construction)}, často označována
+    také jako "agregace" byla jedním z~prvních problémů, které byly studovány v rámci inteligence
+    hejna robotů. Jedná se o způsob chování, kdy roboti se snaží posbírat náhodně rozmístěné
+    pasivní objekty na jedno místo.
+\end{itemize}
+
+
 \subsection{Návrh a modelování}
+Cílem této kapitoly je představit základní koncepty a postupy při návrhu multirobotických
+systémů, které vykazují emergentní chování plynoucí ze samoorganizace. Tyto metody lze
+shnout pod pojem "inženýrství samoorganizace" ({\it engineering of self-organization}).
+
 Základním problémem při návrhu swarmových robotických systémů je určení konceptu
 lokální komunikace mezi roboty tak, aby hejno vykazovalo požadované chování. Dalším
 problémem je pak návrh vlastního fyzického zpracování robotů s ohledem na úkoly, které
 mají společně plnit. V obecné rovině zatím neexistuje obecný postup či metodika pro návrh
 takových systémů. Přístupy, které jsou dnes uplatňovány, by se daly rozdělit na dva
-hlavní směry:\\
-{\it Ad-hoc přístupy.} TODO \\
-{\it Principielní přístupy.} TODO \\
+hlavní směry \cite{Blum08SwarmInt}[90-91]:
+
+\paragraph{Ad-hoc přístup} je nejjednodušší metodou pro návrh swarmu. Návrhář se většinou
+inspiruje chováním hmyzu v přírodě, abstrahuje z něj nejdůležitější znaky a parametry
+a na jejich základě pak zformuluje algoritmus, jak dosáhnout požadovaného emergentního
+chování u robotů. Přestože je tento přístup hojně využíván, skrývá v sobě nebezpečí v podobě
+nízké úrovně laditelnosti a optimalizace celého procesu návrhu. I když je celková konstrukce
+výsledného robota známa, může být problém nalézt optimální hodnoty pro všechny parametry systému.
+Systematické experimentování pro nalezení těchto hodnot může být zdlouhavé a někdy i obtížně
+realizovatelné.
+
+\paragraph{Systémové přístupy} se nesnaží o návrh robotů, kteří pak dosahují očekávaného chování
+v hejnu. Místo toho používají obecnou metodiku, která modeluje přímo požadované chování swarmu
+a z modelu je pak odvozeno chování jedinců. Jedním z~těchto přístupů je umělá evoluce. Ve většině
+studií {\bf CITE!} byla použita jednoduchá vícevrstvá dopředná nebo rekurentní neuronová síť,
+která zakódovala chování hejna v simulovaném prostředí. Z tohoto modelu pak byly parametry
+chování přeneseny do fyzického robota. Princip těchto přístupů je zobecněn na obrázku
+\ref{fig:swarmdesign}.
+
+\begin{figure}[here]
+  \centering
+  \includegraphics[width=14cm]{./img/swarm_rob_design.pdf}
+  \caption{Princip návrhu robotického swarmu. Důraz je kladen na modelování a simulaci swarmu.}
+  \label{fig:swarmdesign}
+\end{figure}
+
+\subsubsection{Modelování robotického hejna}
+\begin{itemize}
+  \item Modelování na úrovni senzorů
+  \item Mikroskopické modelování
+  \item Makroskopické modelování
+\end{itemize}
 
 
-\subsection{Příklady reálných systémů založených na robotice hejna}
+\subsection{Realizace}
+V této kapitole se budeme zabývat fyzickou realizací robotického swarmu. Cílem kapitoly
+je vytvoření přehledu existujících technologií, které jsou využívány pro implementaci
+robotů, které pak tvoří swarm. Nebudeme se tedy zabývat realizací jednotlivých robotů,
+jejich motory, senzory atp., ale prvky, které jsou z hlediska robotiky speciální a které
+se využívají pouze v multirobotických systémech. Jako příklady zde uvedeme existující
+fyzické systémy včetně porovnání funkcionality a použitých technologií.
+
+TODO.
+\paragraph{Komunikace.} Pro komunikaci mezi roboty se dnes používají moduly založené na
+IR, dále IEEE 802.15.4/ZigBee (roboti e-Puck a Kobot) a často také IEEE 802.11/Wi-Fi (s-bot, Centibot).
+
+\paragraph{Fyzická interakce.} Blabla.
 
 
 
