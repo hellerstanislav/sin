@@ -8,7 +8,6 @@
 \usepackage{verbatim} 
 \usepackage[unicode]{hyperref}
 
-
 \setlength{\hoffset}{-1.3cm} % 1.7
 \setlength{\voffset}{-2cm} % 2
 \setlength{\textheight}{23.3cm}
@@ -20,8 +19,6 @@
 
 \newcommand{\HRule}{\rule{\linewidth}{0.2mm}}
 
-\let\stdsection\section
-\renewcommand\section{\newpage\stdsection}
 
 \begin{document}
 
@@ -30,7 +27,7 @@
 
 % Obsah
 \tableofcontents
-
+\newpage
 
 % -----------------------------------------------------------------------------
 % UVOD
@@ -65,6 +62,7 @@ Kecy o tom, jak je možné swarm využít v:
   \item vojenství
 \end{itemize}
 
+\newpage
 
 
 % -----------------------------------------------------------------------------
@@ -79,7 +77,7 @@ Kecy o tom, jak je možné swarm využít v:
   \item Schopnost adaptace
 \end{itemize}
 
-
+\newpage
 
 % -----------------------------------------------------------------------------
 % OPTIMALIZACE (ACO, PSO, GWO atp.)
@@ -97,6 +95,7 @@ Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
 \subsection{Stochastic diffusion search (SDS)}
 \url{http://en.wikipedia.org/wiki/Stochastic_diffusion_search}
 
+\newpage
 
 % -----------------------------------------------------------------------------
 % SWARM ROBOTICS
@@ -211,7 +210,10 @@ absence fyzické realizace zmiňovány. Těmito požadavky jsou:
   \item {\bf Komunikace.} Propojení kabely a komunikace přes drátové připojení je jistě
     nedostatečné. Většina multirobotických a swarmových systémů by proto měla podporovat
     bezdrátovou komunikaci mezi roboty a také mezi konzolí a robotem pro snažší monitorování
-    a ladění robotů.
+    a ladění robotů. Dnes se v robotických systémech používají moduly založené na IR přenosu,
+    dále IEEE 802.15.4/ZigBee (Kobot) a často také IEEE 802.11/Wi-Fi (s-bot, Centibot).
+    Robot e-Puck je vybaven rozhraním pro komunikaci přes Bluetooth. V některých systémech
+    (Kobot) bývají tyto kanály využívány také pro paralelní programování robotů ve swarmu.
   \item {\bf Fyzická interakce.} Roboti by měli umět fyzicky interagovat ve smyslu využití
     fyzických schopností svých i cizích pro dosažení určitého cíle (např. skládáním robotů
     do většího a silnějšího celku). Lze nahlédnout, že v některých aplikacích musí být robot
@@ -337,7 +339,7 @@ realizovatelné.
 \paragraph{Systémové přístupy} se nesnaží o návrh robotů, kteří pak dosahují očekávaného chování
 v hejnu. Místo toho používají obecnou metodiku, která modeluje přímo požadované chování swarmu
 a z modelu je pak odvozeno chování jedinců. Jedním z~těchto přístupů je umělá evoluce. Ve většině
-studií {\bf CITE!} byla použita jednoduchá vícevrstvá dopředná nebo rekurentní neuronová síť,
+studií (např. \cite{Dorigo05}) byla použita jednoduchá vícevrstvá dopředná nebo rekurentní neuronová síť,
 která zakódovala chování hejna v simulovaném prostředí. Z tohoto modelu pak byly parametry
 chování přeneseny do fyzického robota. Princip těchto přístupů je zobecněn na obrázku
 \ref{fig:swarmdesign}.
@@ -350,39 +352,51 @@ chování přeneseny do fyzického robota. Princip těchto přístupů je zobecn
 \end{figure}
 
 \subsubsection{Modelování robotického hejna}
+Jak již bylo zmíněno, modelování je často nedílnou součástí návrhu systémů založených na
+hejnu robotů. Tyto systémy lze modelovat na různých úrovních abstrakce:
 \begin{itemize}
   \item Modelování na úrovni senzorů
   \item Mikroskopické modelování
   \item Makroskopické modelování
 \end{itemize}
 
+\paragraph{Modelování na úrovni senzorů} je pravděpodobně nejpodrobnější z úrovní, na kterých
+lze robotický systém smysluplně modelovat. Tento způsob je používán pro výstavbu realistických
+simulátorů robotickýc systémů, ale pro modelování swarmu je třeba zajistit větší důraz na
+úrovni komunikace a interakcí mezi roboty. Nevýhodou modelování na úrovni senzorů je vysoká
+výpočetní náročnost simulace takových modelů. Simulace tak musí být paralelizovány a pro
+výpočet bývají použity výkonné clustery počítačů.
 
-\subsection{Realizace}
-V této kapitole se budeme zabývat fyzickou realizací robotického swarmu. Cílem kapitoly
-je vytvoření přehledu existujících technologií, které jsou využívány pro implementaci
-robotů, které pak tvoří swarm. Nebudeme se tedy zabývat realizací jednotlivých robotů,
-jejich motory, senzory atp., ale prvky, které jsou z hlediska robotiky speciální a které
-se využívají pouze v multirobotických systémech. Jako příklady zde uvedeme existující
-fyzické systémy včetně porovnání funkcionality a použitých technologií.
+\paragraph{Mikroskopické modelování} je podobné jako modelování na úrovni senzorů; model
+je tvořen na úrovni jedince. Stavy robota a přechody mezi jeho stavy jsou modelovány analyticky.
+Při použití této metody pak nejsou simulovány interakce jedinců uvnitř systému, ale model
+je vystaven na vyšší úrovni. Tento přístup je co do modelování a simulace podstatně rychlejší,
+než senzorově orientované modely a přitom postkytují dostatečně přesné parametry chování
+a výstupy systému.
 
-TODO.
-\paragraph{Komunikace.} Pro komunikaci mezi roboty se dnes používají moduly založené na
-IR, dále IEEE 802.15.4/ZigBee (roboti e-Puck a Kobot) a často také IEEE 802.11/Wi-Fi (s-bot, Centibot).
-
-\paragraph{Fyzická interakce.} Blabla.
-
-
-
-
-\section{Další přístupy a metody}
-FIXME: budeme toto vůbec dělat? Myslím, že i tak toho budeme mít dost.
-\begin{itemize}
-  \item cellular robotic systems, učení a adaptační strategie
-  \item chaos \& swarm
-\end{itemize}
+\paragraph{Makroskopické modelování} je na rozdíl od obou předchozích přístupů prováděno
+na úrovni celého hejna. V modelu je zde reprezentován celkový stav systému a pro nalezení
+stabilního stavu a optimálních hodnot parametrů je třeba model vyhodnotit pouze jednou.
+Pokud by byl robotický systém modelován pomocí PFSM (pravděpodobnostní konečný automat),
+v mikroskopickém modelování by každý robot odpovídal jednomu PFSM, zatímco při použití
+makroskopického modelu by celé hejno bylo reprezentováno jedním PFSM\cite{Martinoli04}.
 
 
 
+\subsection{Otázky}
+\begin{enumerate}
+  \item Čím se liší oblast {\it Swarm Robotics} (robotika hejn) od přístupů, které využívají
+    inteligence roje pro optimalizaci?
+  \item Jaké základní vlastnosti musí mít robotický systém, abychom jej klasifikovali jako swarm?
+  \item Jaké požadavky klademe na roboty, které mají být využity v hejnu?
+  \item Uveďte základní dva koordinační mechanismy, které se vyskytují uvnitř robotického hejna.
+  \item Jaký je rozdíl mezi těmito modely chování robotů: agregace a disperze?
+  \item Uveďte alespoň tři problémy, které jsou řešitelné pomocí hejna robotů.
+  \item Popište principy uplatňované při návrhu robotického swarmu, proces ilustrujte na obrázku.
+\end{enumerate}
+
+
+\newpage
 \renewcommand{\refname}{\section{Použitá literatura}}
 \bibliographystyle{plain}
 \bibliography{refs}
