@@ -3,7 +3,7 @@
 \usepackage[czech]{babel}
 \usepackage[pdftex]{graphicx}
 \usepackage[utf8]{inputenc}
-
+\usepackage{amsthm}
 \usepackage{wrapfig}
 \usepackage{verbatim} 
 \usepackage[unicode]{hyperref}
@@ -19,6 +19,7 @@
 
 \newcommand{\HRule}{\rule{\linewidth}{0.2mm}}
 
+\newtheorem{define}{Definice}
 
 \begin{document}
 
@@ -34,18 +35,74 @@
 % -----------------------------------------------------------------------------
 
 \section{Úvod}
-Pro tuto kapitolu se bude výborně čerpat z \cite{Blum08SwarmInt} \\
-\url{http://www.springerlink.com/content/978-3-540-74089-6#section=226923&page=7&locus=23}
+Inteligence roje ({\it angl. Swarm Intelligence}) je jedním z relativně nových
+paradigmat\footnote{Jako první tento pojem představil G.Beni v roce 1989, viz
+\cite{BeniWang89}.} v~oblasti umělé inteligence. Již dlouhou dobu před prvním
+využitím inteligence roje v informatice byli biologové fascinováni způsoby,
+jakými dokáže hmyz řešit problémy, které jsou nad síly jedinece a přesností
+a efektivitou, s jakou skupina jedinců komunikuje a interaguje; mravenci dokáží
+společnými silami přemístit relativně velké objekty, hejno ptáků letí synchronně, 
+včely při hledání místa, na kterém založí nové hnízdo, využívají sofistikovaného
+způsobu vysílání průzkumníků. Tyto a další příklady inteligentního chování hmyzu
+v přírodě vedly výzkumníky k myšlence využití těchto vlastností ve výpočetní
+technice, zvláště v oboru umělé inteligence.
 
-\begin{itemize}
-  \item obecné kecy o tom, k čemu to je, čím je to inspirováno atp.
-  \item zasazení do rámce s agenty (multiagentními systémy) a roboty
-  \item chtělo by to tady úvod typu jako je v Literature Overview (Yang Liu, Kevin M. Passino)
-\end{itemize}
+Při pohledu na swarm jako inteligentní systém, jej lze definovat jako skupinu
+{\it N} agentů, kteří společně kooperují a interagují, aby dosáhli nějakého cíle.
+Význam označení agent zde nemá stejný význam jako v~{\it multiagentních systémech};
+většina rojů je složena z {\it jedinců}, kteří nejsou příliš inteligentní, mají omezené
+schopnosti a samostatně nevykazují žádné známky inteligence. Systém obsahující větší
+množství takových agentů ale při vhodném nastavení může řešit i poměrně složité
+problémy. Příkladem takových problémů může být optimalizace (obecně {\it NP} problémy),
+kooperativní transport v~oblasti robotiky či problémy, ve kterých je třeba systémy
+s~vysokou adaptabilitou a schopností samoopravy.
+
+Pro další výklad je třeba definovat některé často užívané pojmy. Je třeba upozornit,
+že přesné matematické definice těchto jevů v~oblasti aplikace v informatice v~současnosti
+neexistují. Bohužel, mezi akademiky neexistuje shoda v oblasti významu následujících pojmů
+a proto tyto definice uvádíme spíše pro ilustraci.
+\begin{define}
+  {\bf Emergentní jev} představuje vznik netriviálních globálních vlastností systému na
+  základě množství jednoduchých lokálních interakcí. Tyto vlastnosti nelze odvodit studiem
+  jednotlivých entit nezávisle na ostatních složkách systému.
+\end{define}
+
+\begin{define}
+  {\bf Samoorganizace} je vlastnost systému, který je autonomní, adaptivní a jeho 
+  části vykazují emergentní chování. \cite{Wuchner07}
+\end{define}
+Původ tohoto termínu sahá do 50. let 20. století, kdy spadal do oblasti obecné teorie
+systémů a kybernetiky. Často jsou v souvislosti se samoorganizací zmiňovány pojmy
+{\it pozitivní a negativní zpětná vazba}, které jsou základem většiny samoorganizujících
+se systémů.
+
+\begin{define}
+  {\bf Stigmergie} je mechanismus komunikace, kde si jedinci nepředávají informace přímo,
+  ale pouze nepřímo přes prostředí. \cite[s.6]{Heylighen99}
+\end{define}
+Původ slova pramení v řečtině ze spojení slov "stigma" (znak) a "ergon" (práce). Příkladem
+stigmergické komunikace je spolupráce mravenců, kteří na zemi zanechávají feromonové stopy
+na cestě za potravou a předávají si tak informaci o tom, kde lze její zdroj nalézt.
+
+\begin{define}
+  {\bf Kolektivní inteligence} je schopnost skupiny jedinců řešit problém lépe nebo kvalitněji,
+  než by je řešil jednotlivec. \cite[s.1]{Heylighen99}
+\end{define}
+
 
 \subsection{Biologický základ inteligence roje}
 Čerpat z \cite{Blum08SwarmInt}, kapitola Biological Foundations of Swarm Intelligence
 a z \cite{fleischer2005}, kapitola II/a Observations of Social Insects.
+
+Hmyzu, který se shlukuje do větších seskupení, interaguje s ostatními členy skupiny,
+říkáme {\it společenský hmyz}. Ve většině případů, které jsou v přírodě pozorovány,
+takový hmyz vykazuje při řešení základních problémů poměrně vysokou inteligenci. V této
+kapitole se budeme věnovat popisu některých jevů, se kterými se ve spojitosti s~chováním
+společenského hmyzu můžeme setkat. Tento popis bude uveden v míře nezbytné pro pochopení
+problematiky, avšak se zřetelem na technické, nikoli biologické zaměření tohoto učebního
+textu.
+
+
 \begin{itemize}
   \item pozorování sociálního hmyzu (mravenci, včely, atp.)
   \item mechanismy pro řešení problémů
@@ -62,22 +119,15 @@ Kecy o tom, jak je možné swarm využít v:
   \item vojenství
 \end{itemize}
 
-\newpage
-
-
-% -----------------------------------------------------------------------------
-% ZAKLADNI POJMY
-% -----------------------------------------------------------------------------
-
-\section{Definice základních pojmů}
-\begin{itemize}
-  \item Samoorganizace (\cite{fleischer2005})
-  \item Emergentní jev (\cite{fleischer2005})
-  \item Kolektivní inteligence (\cite{fleischer2005})
-  \item Schopnost adaptace
-\end{itemize}
+\subsection{Otázky}
+\begin{enumerate}
+  \item Jak se liší přístup inteligence roje od klasických multiagentních systémů?
+  \item Jaké problémy jsou řešitelné pomocí inteligence roje?
+  \item Vysvětlete pojmy emergence, samoorganizace a kolektivní chování.
+\end{enumerate}
 
 \newpage
+
 
 % -----------------------------------------------------------------------------
 % OPTIMALIZACE (ACO, PSO, GWO atp.)
@@ -129,11 +179,12 @@ Pro odlišení robotiky, která se zabývá hejny robotů, od ostatních směrů
 studují multirobotické systémy, je třeba definovat, jakou oblast robotiky v sobě
 zahrnuje {\it Swarm robotics}.
 
-\paragraph{Definice.} {\it Oblast robotiky hejna se zabývá studiem
+\begin{define} Oblast robotiky hejna se zabývá studiem
 velkého počtu relativně jednoduchých, fyzicky realizovaných agentů, kteří jsou
 navrženi tak, aby jejich požadované kolektivní chování bylo způsobeno pouze
-lokálními interakcemi mezi agenty navzájem, případně mezi agenty a okolím.}
-\cite{Sahin05}\\
+lokálními interakcemi mezi agenty navzájem, případně mezi agenty a okolím.
+\cite{Sahin05}
+\end{define}
 
 Na rozdíl od nerobotického swarmu, kde jedinec v roji či hejnu byl implementován
 většinou na úrovni softwarové, je zde kladen důraz na fyzickou realizaci robota
@@ -325,7 +376,7 @@ lokální komunikace mezi roboty tak, aby hejno vykazovalo požadované chován�
 problémem je pak návrh vlastního fyzického zpracování robotů s ohledem na úkoly, které
 mají společně plnit. V obecné rovině zatím neexistuje obecný postup či metodika pro návrh
 takových systémů. Přístupy, které jsou dnes uplatňovány, by se daly rozdělit na dva
-hlavní směry \cite{Blum08SwarmInt}[90-91]:
+hlavní směry \cite[s.90-91]{Blum08SwarmInt}:
 
 \paragraph{Ad-hoc přístup} je nejjednodušší metodou pro návrh swarmu. Návrhář se většinou
 inspiruje chováním hmyzu v přírodě, abstrahuje z něj nejdůležitější znaky a parametry
