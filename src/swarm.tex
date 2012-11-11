@@ -55,7 +55,8 @@ schopnosti a samostatně nevykazují žádné známky inteligence. Systém obsah
 množství takových agentů ale při vhodném nastavení může řešit i poměrně složité
 problémy. Příkladem takových problémů může být optimalizace (obecně {\it NP} problémy),
 kooperativní transport v~oblasti robotiky či problémy, u kterých je třeba vyvinout
-řešení s~vysokou adaptabilitou a schopností samoopravy.
+řešení s~vysokou adaptabilitou a schopností samoopravy. Největší zájem o tuto poměrně
+novou disciplínu je v oborech, které souvisí vojenstvím, telekomunikacemi a v~medicíně.
 
 Pro další výklad je třeba definovat některé často užívané pojmy. Je třeba upozornit,
 že přesné matematické definice těchto jevů v~oblasti aplikace v informatice v~současnosti
@@ -86,44 +87,111 @@ na cestě za potravou a předávají si tak informaci o tom, kde lze její zdroj
 
 \begin{define}
   {\bf Kolektivní inteligence} je schopnost skupiny jedinců řešit problém lépe nebo kvalitněji,
-  než by je řešil jednotlivec. \cite[s.1]{Heylighen99}
+  než by jej řešil jednotlivec. \cite[s.1]{Heylighen99}
 \end{define}
 
 
 \subsection{Biologický základ inteligence roje}
-Čerpat z \cite{Blum08SwarmInt}, kapitola Biological Foundations of Swarm Intelligence
-a z \cite{fleischer2005}, kapitola II/a Observations of Social Insects.
-
 Hmyzu, který se shlukuje do větších seskupení, interaguje s ostatními členy skupiny,
 říkáme {\it společenský hmyz}. Ve většině případů, které jsou v přírodě pozorovány,
-takový hmyz vykazuje při řešení základních problémů poměrně vysokou inteligenci. V této
+takový hmyz vykazuje při řešení základních problémů poměrně vysokou inteligenci. Mezi
+tento hmyz řadíme např. mravence, včely, vosy, kobylky, termity a další. V této
 kapitole se budeme věnovat popisu některých jevů, se kterými se ve spojitosti s~chováním
-společenského hmyzu můžeme setkat. Tento popis bude uveden v míře nezbytné pro pochopení
-problematiky, avšak se zřetelem na technické, nikoli biologické zaměření tohoto učebního
-textu.
+společenského hmyzu můžeme setkat. Tento popis\footnote{Pokud není uvedeno jinak, veškerý
+materiál k~textu této kapitoly je čerpán z \cite{Beekman08SwarmBio}.} bude uveden v~míře
+nezbytné pro pochopení problematiky, avšak se zřetelem na technické, nikoli biologické
+zaměření tohoto učebního textu.
+
+\paragraph{Mravenci: hledání potravy.}
+Při vyhledávání potravy mravenci využívají stigmergický přístup ke komunikaci. Pokud mravenec
+nalezne zdroj potravy, na cestě zpět zanechává na zemi substanci, která je nazývána {\it feromon}.
+Ostatní mravenci cítí přítomnost feromonů a mají tendenci sledovat cestu, na které je koncentrace
+feromonů vyšší \cite{Dorigo06antcolony}. Pokud po jedné cestě projde více mravenců, tím více po
+sobě zanechají feromonů a tím spíše po této trase půjde větší počet mravenců v budoucnosti.
+
+Feromonová stopa ale po čase mizí; tomuto procesu říkáme {\it vypařování}. Tímto mechanismem se
+mravenci dokáží velmi rychle a efektivně přizpůsobovat změnám podmínek - např. pokud zdroj
+potravy zmizel či pokud na cestě za potravou vznikla překážka.
+
+\paragraph{Mravenci: přesun kořisti.}
+Dalším ze známých jevů u mravenců je kooperativní transport. Pokud mravenci uloví kořist, která
+je velká a příliš těžká pro jednotlivce, aby ji odtáhl, více mravenců spojí síly a společně
+kořist odnesou.
+
+\paragraph{Mravenci: výběr místa pro mraveniště.}
+Chování mravenců\footnote{Toto chování se vztahuje ke druhu {\it Temnothorax albipennis}.} při
+průzkumu a hledání místa pro nové mraveniště se liší od způsobu hledání potravy. Nevyužívají
+feromonové stopy, ale dvou jiných způsobů: párování ({\it tandem running}) a přenosu ({\it social
+carrying}). Průzkumníci, kteří nalezli vhodné místo pro nové mraveniště, si vyberou druhého
+mravence do páru a toho dovedou na nalezené místo (párování). Tím jej naučí, jak se má k~místu
+dostat a pokud takto zaučený mravenec usoudí, že se jedná o dobré místo, začne tam provázet
+další mravence. Výsledkem tohoto procesu je několik míst, na kterých se soustředí velké množství
+mravenců, protože méně kvalitní lokality nebudou mravence tolik lákat. Aby bylo zajištěno,
+že bude vybráno pouze jedno místo, od určitého počtu jedinců na vybraném místě se mravenci
+přestanou párovat (ve smyslu prohledávání) a jedinci na starém místě (včetně larev, vajíček atp.)
+jsou přeneseni na místo nové. Tím je zajištěno, že proces výběru konverguje.
+
+\paragraph{Včely: plnění pláství.}
+Prakticky přesné šestiúhelníkové buňky nejsou jedinou zajímavostí včelích pláství. Při plnění
+pláství nektarem, vajíčky a pylem včely dodržují zvláštní vzor, který vytváří tři oddělené
+regiony: ve vnitřním kruhu jsou nakladena vajčka, ze kterých se vylíhnou nové včely, okolo
+této oblasti je vytvořen pruh buněk, které obsahují pyl, který je určen jako potrava pro larvy.
+Na vnějším okraji plástve je pak oblast, ve které se vyskytuje nektar, který je pak přetvořen
+na med. Celý vzor je znázorněn na obrázku \ref{fig-honeycomb}.
+
+Umístění pylu blízko larev je velmi efektivní - snižuje čas a námahu pro krmení. Tvorba
+tohoto vzoru ale není náhodná. Královna si buňky, do kterých naklade vajíčka, vybírá tak, aby
+byly dostatečně vzdálené od kraje plástve a preferuje místa, kde se vajíčka již v okolí vyskytují.
+Při krmění včely vybírají vždy buňky, které jsou nejblíže larvám. I v~případě, že by byl pyl
+a nektar nakladen náhodně, vznikne na plástvi díky vybírání nejbližších buněk vždy podobný
+(výše popsaný) vzor, což bylo dokázáno simulací (Camazine 1991). Tento princip je další ukázkou
+emergentního jevu, kdy výskyt vzoru na úrovni plástve je tvořen lokálními interakcemi na úrovni
+buněk.
+
+\begin{figure}[here]
+  \centering
+  \includegraphics[width=10cm]{./img/comb.png}
+  \caption{Typický vzor rozmístění medu (šedý), pylu (bílý) a vajíček (černé) na výřezu
+   včelí plástve v horním levém rohu. Převzato z \cite{Beekman08SwarmBio}.}
+  \label{fig-honeycomb}
+\end{figure}
 
 
+\paragraph{Včely: hledání nového místa pro hnízdo.}
+Včely při vyhledávání místa pro hnízdo využívají systému průzkumu a zpětné vazby. Průzkumníci
+se vydávají hledat nové místo do všech směrů od současného hnízda. V případě, že průzkumník
+našel nové místo pro hnízdo, při návratu zpět do hnízda provádí jistý druh "tance". Kvalita
+místa je v~tanci projevena jeho délkou a pohyby, které včela provádí. Na jejich základě dává
+roji vědět, jak daleko leží nalezené místo a jakou kvalitu má. Na počátku procesu vyhledávání
+se mnoho průzkumných včel vrací do roje a podávají zprávu o místech, které našly. Po několika
+hodinách proces konverguje a pro některá místa již žádné včely netančí; těsně před tím, než se
+roj vydá na cestu, většina průzkumných včel tančí tanec reprezentující jedno místo, na které
+roj poletí.
+
+\paragraph{Včely: přesun roje.}
+Přesun skupiny hmyzu může být považován za jeden ze stěžejních problémů, který hmyz musí
+řešit při změně místa hnízda. Existují dva extrémní případy jak se skupina "rozhoduje", kterým
+směrem se bude pohybovat\cite{Blum08SwarmInt}:
 \begin{itemize}
-  \item pozorování sociálního hmyzu (mravenci, včely, atp.)
-  \item mechanismy pro řešení problémů
-  \item feromony, vypařování
-  \item komunikace a interakce mezi hmyzem (resp. agenty)
+  \item buď se skupina "dohodne", tedy každý člen zná přibližný směr pohybu
+  \item nebo existuje poměrně malé množství informovaných členů (tzv. {\it vůdců}), kteří
+        neinformovanou většinu vedou.
 \end{itemize}
+V druhém případě je třeba, aby {\it vůdci} dokázali skupinu nějakým mechanismem ovládat. V principu
+lze v přírodě pozorovat, že neinformovaní členové vždy přizpůsobují směr svého pohybu ostatním.
+Toho vůdci využívají a díky své tendenci letět správným směrem mají vliv na směr pohybu skupiny.
+Další možností je, že vůdci vysílají určitý druh signálů, kterým skupinu řídí.
 
-\subsection{Možnosti využití}
-Kecy o tom, jak je možné swarm využít v:
-\begin{itemize}
-  \item telekomunikační systémy (optimalizace)
-  \item robotika - výrobní, provozní a inspektční systémy, zemědělství, medicína
-  \item logistika, kooperativní transport
-  \item vojenství
-\end{itemize}
+Ve včelím roji ví o novém směru pohybu pouze asi 5\% členů, jedná se tedy o princip neinformované
+většiny a informovaných vůdců.
+
 
 \subsection{Otázky}
 \begin{enumerate}
   \item Jak se liší přístup inteligence roje od klasických multiagentních systémů?
   \item Jaké problémy jsou řešitelné pomocí inteligence roje?
   \item Vysvětlete pojmy emergence, samoorganizace a kolektivní chování.
+  \item Popište způsob, jakým si mravenci předávají informace při vyhledávání potravy.
 \end{enumerate}
 
 \newpage
@@ -255,7 +323,7 @@ které u jiných multirobotických systémů splněny většinou nejsou:
 
 \subsubsection{Požadavky na jedince}
 Robotické swarmové systémy kladou na jedince (roboty) několik požadavků, které jsou
-z hlediska robotiky pochopitelné, ale v oblasti obecné inteligence nejsou z důvodu
+z hlediska robotiky pochopitelné, ale v oblasti obecné inteligence roje nejsou z důvodu
 absence fyzické realizace zmiňovány. Těmito požadavky jsou:
 \begin{itemize}
   \item {\bf Komunikace.} Propojení kabely a komunikace přes drátové připojení je jistě
