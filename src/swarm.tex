@@ -39,7 +39,7 @@ Inteligence roje ({\it angl. Swarm Intelligence}) je jedním z relativně novýc
 paradigmat\footnote{Jako první tento pojem představil G.Beni v roce 1989, viz
 \cite{BeniWang89}.} v~oblasti umělé inteligence. Již dlouhou dobu před prvním
 využitím inteligence roje v informatice byli biologové fascinováni způsoby,
-jakými dokáže hmyz řešit problémy, které jsou nad síly jedinece a přesností
+jakými dokáže hmyz řešit problémy, které jsou nad síly jedince a přesností
 a efektivitou, s jakou skupina jedinců komunikuje a interaguje; mravenci dokáží
 společnými silami přemístit relativně velké objekty, hejno ptáků letí synchronně, 
 včely při hledání místa, na kterém založí nové hnízdo, využívají sofistikovaného
@@ -134,7 +134,7 @@ jsou přeneseni na místo nové. Tím je zajištěno, že proces výběru konver
 \paragraph{Včely: plnění pláství.}
 Prakticky přesné šestiúhelníkové buňky nejsou jedinou zajímavostí včelích pláství. Při plnění
 pláství nektarem, vajíčky a pylem včely dodržují zvláštní vzor, který vytváří tři oddělené
-regiony: ve vnitřním kruhu jsou nakladena vajčka, ze kterých se vylíhnou nové včely, okolo
+regiony: ve vnitřním kruhu jsou nakladena vajíčka, ze kterých se vylíhnou nové včely, okolo
 této oblasti je vytvořen pruh buněk, které obsahují pyl, který je určen jako potrava pro larvy.
 Na vnějším okraji plástve je pak oblast, ve které se vyskytuje nektar, který je pak přetvořen
 na med. Celý vzor je znázorněn na obrázku \ref{fig-honeycomb}.
@@ -142,7 +142,7 @@ na med. Celý vzor je znázorněn na obrázku \ref{fig-honeycomb}.
 Umístění pylu blízko larev je velmi efektivní - snižuje čas a námahu pro krmení. Tvorba
 tohoto vzoru ale není náhodná. Královna si buňky, do kterých naklade vajíčka, vybírá tak, aby
 byly dostatečně vzdálené od kraje plástve a preferuje místa, kde se vajíčka již v okolí vyskytují.
-Při krmění včely vybírají vždy buňky, které jsou nejblíže larvám. I v~případě, že by byl pyl
+Při krmení včely vybírají vždy buňky, které jsou nejblíže larvám. I v~případě, že by byl pyl
 a nektar nakladen náhodně, vznikne na plástvi díky vybírání nejbližších buněk vždy podobný
 (výše popsaný) vzor, což bylo dokázáno simulací (Camazine 1991). Tento princip je další ukázkou
 emergentního jevu, kdy výskyt vzoru na úrovni plástve je tvořen lokálními interakcemi na úrovni
@@ -260,7 +260,7 @@ a jeho umístění do reálného prostředí. Důležitou vlastností robotů v 
 hejnu je schopnost fyzicky interagovat s prostředím či ostatními roboty.
 
 Shodnou vlastností hejn robotů některými uvedenými metodami (jako např. optimalizace
-mravenční kolonií) je decentralizovaná koordinace. Neexistuje zde žádný vůdce
+mravenčí kolonií) je decentralizovaná koordinace. Neexistuje zde žádný vůdce
 nebo jedinec, který by direktivně řídil chování ostatních jedinců v hejnu.
 Veškeré emergentní chování robotů tedy plyne pouze z lokální komunikace.
 
@@ -290,12 +290,12 @@ Hejno robotů můžeme klasifikovat podle různých úhlů pohledu na vlastnosti
      statické (jedna topologie) a nebo dynamické, kde vztahy mezi jedinci se může měnit.}
   \item {\bf Výpočetní schopnost jedince} {- každý jedinec z hejna má určitou výpočetní schopnost
      odpovídající modelům, které jsou známé z teoretické informatiky. Můžeme tedy rozeznávat
-     velmi jednoduché jedince, které pracují jako nelinární sumační jednotka - tyto jednotky
-     pak mohou bý využity pro výstavbu a simulaci neronové sítě, ale obecně je tento model
+     velmi jednoduché jedince, které pracují jako nelineární sumační jednotka - tyto jednotky
+     pak mohou být využity pro výstavbu a simulaci neuronové sítě, ale obecně je tento model
      příliš jednoduchý, než aby se dali jedinci nazývat {\it roboty}. Dále lze uvažovat
      roboty, jejichž výpočetní model odpovídá konečnému automatu (což je preferovaným modelem
      u systémy se subsumpční architekturou). Další úrovní je zásobníkový automat, který není
-     v robotice tak běžný a konečně turingův stroj, což je výpočetní model používaný dnes
+     v robotice tak běžný a konečně Turingův stroj, což je výpočetní model používaný dnes
      většinou robotických systémů.}
 \end{itemize}
 
@@ -305,7 +305,7 @@ které u jiných multirobotických systémů splněny většinou nejsou:
 \begin{itemize}
   \item {\bf Robustnost} - robotický swarm by měl být schopen pracovat i za zhoršených
     podmínek okolí - např. při rušení či při selhání některých jedinců v hejnu. Hejna
-    jsou typicky redundantnm systémem - výpadek jednoho jedince může být velmi jednoduše
+    jsou typicky redundantním systémem - výpadek jednoho jedince může být velmi jednoduše
     a rychle nahrazen dalším. Aby bylo zamezeno častým selháním jedinců ve swarmu, měli by
     být poměrně jednoduché konstrukce na úrovni hardwarové i softwarové.
   \item {\bf Flexibilita} - hejno robotů by mělo být schopno řešit flexibilně různé úkoly.
@@ -328,7 +328,7 @@ absence fyzické realizace zmiňovány. Těmito požadavky jsou:
 \begin{itemize}
   \item {\bf Komunikace.} Propojení kabely a komunikace přes drátové připojení je jistě
     nedostatečné. Většina multirobotických a swarmových systémů by proto měla podporovat
-    bezdrátovou komunikaci mezi roboty a také mezi konzolí a robotem pro snažší monitorování
+    bezdrátovou komunikaci mezi roboty a také mezi konzolí a robotem pro snazší monitorování
     a ladění robotů. Dnes se v robotických systémech používají moduly založené na IR přenosu,
     dále IEEE 802.15.4/ZigBee (Kobot) a často také IEEE 802.11/Wi-Fi (s-bot, Centibot).
     Robot e-Puck je vybaven rozhraním pro komunikaci přes Bluetooth. V některých systémech
@@ -380,7 +380,7 @@ robotů s Turingovým strojem.
 
 Důkaz je založen na nekonečné množině komunikujících konečných automatů, u kterých jsou
 rozlišeny tři druhy stavů: {\it vysílající, přijímající zleva a přijímající zprava}.
-Základní myšlenkou pro simulaci turingova stroje na této množině konečných automatů je
+Základní myšlenkou pro simulaci Turingova stroje na této množině konečných automatů je
 pak předpoklad, že každý automat simuluje konečné řízení Turingova stroje a reprezentuje
 jedno pole na pásce. Automat korespondující s aktuálním polem na pásce je vždy ve stavu
 {\it vysílající}, automat napravo je ve stavu {\it přijímající zleva} a automat
@@ -408,7 +408,7 @@ tuto práci by mohla převzít specializovaná hejna robotů, která by tyto oso
 možným způsobem využití disperze je při předávání informací na velkou vzdálenost, kdy signál
 od jednoho robota ke druhému nestačí (např. přenos informace na kilometry).
 \paragraph{Vytváření vzorů} představuje obecný problém, který lze definovat jako vytváření
-požado-vaných geometrických obrazců a vzorů pomocí hejna robotů bez centralizované koordinace.
+požadovaných geometrických obrazců a vzorů pomocí hejna robotů bez centralizované koordinace.
 Toto chování není pouze geometrické, ale může být velmi funkční - v přírodě se vyskytuje například
 ve formě vytvoření kruhovitého vzoru pro obklíčení kořisti skupinou predátorů.\\
 
@@ -420,7 +420,7 @@ vychází problémy, které jsou řešitelné pomocí robotického swarmu \cite{
     což však není zcela přesné, protože většina přístupů pro vyhledávání (např. potravy)
     je založena na stigmergické komunikaci.
   \item {\bf Skládání} {\it (Self-assembly)} je úkaz pozorovaný u mravenců, kteří vytváření
-    řetězcovité formace, pomocí kterých vytváří "mosty", aby zůstali nad vodou. Problém skládání
+    řetězcové formace, pomocí kterých vytváří "mosty", aby zůstali nad vodou. Problém skládání
     je nejčastěji řešen pomocí robotických chapadel nebo jiných mechanismů pro úchop a držení
     části dalšího robota. Skládání je typickým příkladem agregačního chování robotů.
   \item {\bf Kooperativní transport} {\it (Cooperative transport)} je jedním z nejzjevnějších
@@ -437,7 +437,7 @@ vychází problémy, které jsou řešitelné pomocí robotického swarmu \cite{
 \subsection{Návrh a modelování}
 Cílem této kapitoly je představit základní koncepty a postupy při návrhu multirobotických
 systémů, které vykazují emergentní chování plynoucí ze samoorganizace. Tyto metody lze
-shnout pod pojem "inženýrství samoorganizace" ({\it engineering of self-organization}).
+shrnout pod pojem "inženýrství samoorganizace" ({\it engineering of self-organization}).
 
 Základním problémem při návrhu swarmových robotických systémů je určení konceptu
 lokální komunikace mezi roboty tak, aby hejno vykazovalo požadované chování. Dalším
@@ -481,7 +481,7 @@ hejnu robotů. Tyto systémy lze modelovat na různých úrovních abstrakce:
 
 \paragraph{Modelování na úrovni senzorů} je pravděpodobně nejpodrobnější z úrovní, na kterých
 lze robotický systém smysluplně modelovat. Tento způsob je používán pro výstavbu realistických
-simulátorů robotickýc systémů, ale pro modelování swarmu je třeba zajistit větší důraz na
+simulátorů robotických systémů, ale pro modelování swarmu je třeba zajistit větší důraz na
 úrovni komunikace a interakcí mezi roboty. Nevýhodou modelování na úrovni senzorů je vysoká
 výpočetní náročnost simulace takových modelů. Simulace tak musí být paralelizovány a pro
 výpočet bývají použity výkonné clustery počítačů.
@@ -490,7 +490,7 @@ výpočet bývají použity výkonné clustery počítačů.
 je tvořen na úrovni jedince. Stavy robota a přechody mezi jeho stavy jsou modelovány analyticky.
 Při použití této metody pak nejsou simulovány interakce jedinců uvnitř systému, ale model
 je vystaven na vyšší úrovni. Tento přístup je co do modelování a simulace podstatně rychlejší,
-než senzorově orientované modely a přitom postkytují dostatečně přesné parametry chování
+než senzorově orientované modely a přitom poskytují dostatečně přesné parametry chování
 a výstupy systému.
 
 \paragraph{Makroskopické modelování} je na rozdíl od obou předchozích přístupů prováděno
