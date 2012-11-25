@@ -4,6 +4,7 @@
 \usepackage[pdftex]{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage{amsthm}
+\usepackage{amsfonts}
 \usepackage{wrapfig}
 \usepackage{verbatim} 
 \usepackage[unicode]{hyperref}
@@ -202,16 +203,77 @@ většiny a informovaných vůdců.
 % -----------------------------------------------------------------------------
 
 \section{Inteligence roje v optimalizaci}
-Obecné kecy o optimalizaci...
+%Obecné kecy o optimalizaci...
+Inteligence roje má v optimalizaci jedno z nejdůležitějších využití. Optimalizací rozumíme řešení
+nějakého {\it optimalizačního problému}, který se skládá z hledání optima (maxima či minima)
+nějaké účelové funkce. Mnoho teoretických úloh i úloh z reálného světa vede právě na řešení úlohy
+optimalizace. Jako reálné příklady můžeme uvést plánování odjezdů vlaků ({\it train scheduling}),
+vytváření rozvrhů ({\it timetabling}), optimalizaci tvarů ({\it shape optimization}), návrh
+telekomunikačních sítí či problémy z výpočetní biologie ({\it computational biology}). Mnoho
+těchto problému bylo obecně zjednodušeno například na {\it problém obchodního cestujícího} (TSP),
+což je známý  {\it NP-těžký} problém kombinatorické optimalizace \cite{Blum08SwarmOpt}.
+
+\medskip
+
+Obecně můžeme optimalizační problém $\mathcal{P}$ definovat jako trojici $(S,\omega,f)$, kde $S$
+je prohledávací prostor definovaný na konečné množině proměnných $X_i,i=1,\dots,n$ (přípustná
+množina), $\omega$ je množina omezujících podmínek nad těmito proměnnými a
+$f:S\rightarrow\mathbb{R}^{+}$ je účelová funkce, která přiřazuje ohodnocení každému prvku (neboli
+řešení) z $S$. Pokud mají proměnné diskrétní doménu (definiční obor), hovoříme o diskrétní
+(kombinatorické) optimalizaci, v opačném případě hovoříme o optimalizaci spojité (existuje ale i
+kombinovaná).
+
+Cílem optimalizace je najít řešení $s\in S$ optimalizačního problému $\mathcal{P}$ takové, že
+$f(s)\leq f(s^{\prime}),\forall s^{\prime}\in S$ (v případě, že chceme účelovou funkci
+minimalizovat), či $f(s)\geq f(s^{\prime}),\forall s^{\prime}\in S$ (v případě, že ji chceme
+maximalizovat). V reálných problémech se často můžeme setkat s optimalizací několika účelových
+funkcí zároveň ({\it víceúčelová optimalizace}), či hledání více než jednoho optima účelové funkce
+({\it multimodální optimalizace}) \cite{Blum08SwarmOpt}.
+
+\medskip
+
+Vzhledem k praktické důležitosti optimalizačních problémů bylo vyvinuto mnoho algoritmů, které je
+řeší. V kontextu kombinatorické optimalizace můžeme tyto algoritmy klasifikovat na úplné a přibližné.
+Úplné algoritmy zaručeně najdou pro každý, konečně velký, kombinatorický problém optimální řešení v
+omezeném čase. Pro problémy, které jsou {\it NP-těžké}, ale neexistuje žádný algoritmus, který najde
+řešení v polynomiálním čase ($P\neq NP$). Úplný algoritmus by v nejhorším případě potřeboval
+exponenciální výpočetní čas, což by, vzhledem k praktickému využití, vedlo k velmi dlouhým výpočetním
+časům. Proto je stále vetší pozornost věnována metodám přibližným, kam patří i algoritmy inspirované
+inteligencí roje. Sice u nich nemáme jistotu nalezení optimálního řešení, oproti tomu ale vetšinou
+nalezneme alespoň dostatečně dobré řešení, a to ve významně zkráceném čase. Významným přínosem technik
+inteligence roje je oproti jiným metodám obvykle rychlost, nízká výpočetní náročnost a schopnost
+poskytnout alespoň přibližné řešení tam, kde nám často ani není známo, zda existuje nějaký exaktní
+postup, jak řešení najít.
+
+Dvě nejvýznamnější techniky pro získání přibližných řešení v rozumném čase jsou optimalizace mravenčí
+kolonií ({\it ant colony optimization}) a optimalizace hejnem částic ({\it particle swarm optimization}).
+
 
 \subsection{Optimalizace mravenčí kolonií (ACO)}
 Pro algoritmy typu ACO bude vhodné využít \cite{Dorigo06antcolony}.
 
+Srovnání s genetickými algoritmy?
+
 \subsection{Optimalizace hejnem částic (PSO)}
 Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
 
+%\subsection{Optimalizace včelím rojem (BCO)}
+%Zařadit?
+%\subsection{Optimalizace hejnem světlušek (GSO)}
+%Zařadit?
+
 \subsection{Stochastic diffusion search (SDS)}
 \url{http://en.wikipedia.org/wiki/Stochastic_diffusion_search}
+
+%Další zdroje?
+
+\subsection{Otázky}
+\begin{enumerate}
+  \item Popište typy úloh, pro které se vyplatí využít algoritmy založené na inteligenci roje.
+  \item Vyjmenujte a stručně popište alespoň tři algoritmy používané v optimalizaci inteligencí roje.
+  \item TODO 
+  \item 
+\end{enumerate}
 
 \newpage
 
