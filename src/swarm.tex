@@ -92,7 +92,7 @@ na cestě za potravou a předávají si tak informaci o tom, kde lze její zdroj
 \end{define}
 
 
-\subsection{Biologický základ inteligence roje}
+\subsection{Biologický základ inteligence roje} \label{sub:biolzakl}
 Hmyzu, který se shlukuje do větších seskupení, interaguje s ostatními členy skupiny,
 říkáme {\it společenský hmyz}. Ve většině případů, které jsou v přírodě pozorovány,
 takový hmyz vykazuje při řešení základních problémů poměrně vysokou inteligenci. Mezi
@@ -210,7 +210,7 @@ nějaké účelové funkce. Mnoho teoretických úloh i úloh z reálného svět
 optimalizace. Jako reálné příklady můžeme uvést plánování odjezdů vlaků ({\it train scheduling}),
 vytváření rozvrhů ({\it timetabling}), optimalizaci tvarů ({\it shape optimization}), návrh
 telekomunikačních sítí či problémy z výpočetní biologie ({\it computational biology}). Mnoho
-těchto problému bylo obecně zjednodušeno například na {\it problém obchodního cestujícího} (TSP),
+těchto problému bylo zobecněno například na {\it problém obchodního cestujícího} (TSP),
 což je známý  {\it NP-těžký} problém kombinatorické optimalizace \cite{Blum08SwarmOpt}.
 
 \medskip
@@ -220,58 +220,103 @@ je prohledávací prostor definovaný na konečné množině proměnných $X_i,i
 množina), $\omega$ je množina omezujících podmínek nad těmito proměnnými a
 $f:S\rightarrow\mathbb{R}^{+}$ je účelová funkce, která přiřazuje ohodnocení každému prvku (neboli
 řešení) z $S$. Pokud mají proměnné diskrétní doménu (definiční obor), hovoříme o diskrétní
-(kombinatorické) optimalizaci, v opačném případě hovoříme o optimalizaci spojité (existuje ale i
+(kombinatorické) optimalizaci, v opačném případě hovoříme o optimalizaci spojité (existuje i
 kombinovaná).
 
 Cílem optimalizace je najít řešení $s\in S$ optimalizačního problému $\mathcal{P}$ takové, že
 $f(s)\leq f(s^{\prime}),\forall s^{\prime}\in S$ (v případě, že chceme účelovou funkci
 minimalizovat), či $f(s)\geq f(s^{\prime}),\forall s^{\prime}\in S$ (v případě, že ji chceme
 maximalizovat). V reálných problémech se často můžeme setkat s optimalizací několika účelových
-funkcí zároveň ({\it víceúčelová optimalizace}), či hledání více než jednoho optima účelové funkce
-({\it multimodální optimalizace}) \cite{Blum08SwarmOpt}.
+funkcí zároveň ({\it víceúčelová optimalizace}), hledání více než jednoho optima účelové funkce
+({\it multimodální optimalizace}), či optimalizací {\it dynamickou} \cite{Blum08SwarmOpt}.
 
 \medskip
 
-Vzhledem k praktické důležitosti optimalizačních problémů bylo vyvinuto mnoho algoritmů, které je
-řeší. V kontextu kombinatorické optimalizace můžeme tyto algoritmy klasifikovat na úplné a přibližné.
-Úplné algoritmy zaručeně najdou pro každý, konečně velký, kombinatorický problém optimální řešení v
-omezeném čase. Pro problémy, které jsou {\it NP-těžké}, ale neexistuje žádný algoritmus, který najde
-řešení v polynomiálním čase ($P\neq NP$). Úplný algoritmus by v nejhorším případě potřeboval
-exponenciální výpočetní čas, což by, vzhledem k praktickému využití, vedlo k velmi dlouhým výpočetním
-časům. Proto je stále vetší pozornost věnována metodám přibližným, kam patří i algoritmy inspirované
-inteligencí roje. Sice u nich nemáme jistotu nalezení optimálního řešení, oproti tomu ale vetšinou
-nalezneme alespoň dostatečně dobré řešení, a to ve významně zkráceném čase. Významným přínosem technik
-inteligence roje je oproti jiným metodám obvykle rychlost, nízká výpočetní náročnost a schopnost
-poskytnout alespoň přibližné řešení tam, kde nám často ani není známo, zda existuje nějaký exaktní
-postup, jak řešení najít.
+Vzhledem k praktické důležitosti optimalizačních problémů bylo na jejich řešení vyvinuto mnoho
+algoritmů. V kontextu kombinatorické optimalizace můžeme tyto algoritmy klasifikovat na úplné a
+aproximační. Úplné algoritmy zaručeně najdou pro každý, konečně velký, kombinatorický problém
+optimální řešení v omezeném čase. Pro problémy, které jsou {\it NP-těžké}, ale neexistuje žádný
+algoritmus, který najde řešení v polynomiálním čase ($P\neq NP$). Úplný algoritmus by v nejhorším
+případě potřeboval exponenciální výpočetní čas, což by, vzhledem k praktickému využití, vedlo k
+velmi dlouhým výpočetním časům. Proto je stále vetší pozornost věnována metodám aproximačním, kam
+lze zařadit i algoritmy inspirované inteligencí roje. Sice u nich nemáme jistotu nalezení
+optimálního řešení, na druhou stranu ale nalezneme řešení alespoň blízké optimálnímu, a to ve
+významně zkráceném čase (prohledávací prostor není obvykle prohledán celý) \cite{Blum08SwarmOpt}.
+%TODO jeste neco o spojite? nebo napsat ze ji tu neresime?
+
+Aproximační metody můžeme rozdělit na {\it lokální prohledávání} (iterativní zlepšování počátečního
+řešení až do uváznutí v lokálním extrému) a {\it konstruktivní algoritmy} (budování řešení s využitím
+heuristické znalosti). Metody inteligence roje jsou rozšířením tradičních konstruktivních heuristik o
+schopnost využití zkušeností získaných v průběhu řešení daného problému (tzv. {\it metaheuristiky}).
+Zde můžeme zařadit například i evoluční algoritmy. %TODO upravit
+%heuristiky vs metaheuristiky
+
+Významným přínosem technik inteligence roje je oproti jiným metodám obvykle vetší rychlost, nízká
+výpočetní náročnost a schopnost poskytnout alespoň přibližné řešení tam, kde nám často ani není známo,
+zda existuje nějaký exaktní postup, jak řešení najít. %TODO rozvest, overit
+
+\medskip
 
 Dvě nejvýznamnější techniky pro získání přibližných řešení v rozumném čase jsou optimalizace mravenčí
 kolonií ({\it ant colony optimization}) a optimalizace hejnem částic ({\it particle swarm optimization}).
 
 
 \subsection{Optimalizace mravenčí kolonií (ACO)}
-Pro algoritmy typu ACO bude vhodné využít \cite{Dorigo06antcolony}.
+%Pro algoritmy typu ACO bude vhodné využít \cite{Dorigo06antcolony}.
+Optimalizace mravenčí kolonií byla jedna z prvních technik aproximační optimalizace inspirovaná
+inteligencí roje (konkrétně hledáním potravy u mravenců, viz \ref{sub:biolzakl}).
 
-Srovnání s genetickými algoritmy?
+\subsubsection{Vznik metody}
+\dots
+
+\subsubsection{Princip}
+\dots
+
+\subsubsection{Aplikace na TSP}
+\dots
+
+\subsubsection{Další využití}
+\dots
+
+
+%TODO Srovnání s genetickými algoritmy?
 
 \subsection{Optimalizace hejnem částic (PSO)}
-Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
+%Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
+Optimalizace hejnem částic je populačně založená stochastická optimalizační metoda inspirovaná
+shlukováním zvířat či hmyzu (například hejny ptáků nebo ryb). PSO optimalizuje problém\dots
 
-%\subsection{Optimalizace včelím rojem (BCO)}
-%Zařadit?
-%\subsection{Optimalizace hejnem světlušek (GSO)}
-%Zařadit?
 
-\subsection{Stochastic diffusion search (SDS)}
-\url{http://en.wikipedia.org/wiki/Stochastic_diffusion_search}
+\subsubsection{Vznik metody}
+\dots
 
+\subsubsection{Princip}
+\dots
+
+\subsubsection{Využití}
+\dots
+
+
+%\subsection{Stochastic diffusion search (SDS)}
+%\url{http://en.wikipedia.org/wiki/Stochastic_diffusion_search}
 %Další zdroje?
+
+\subsection{Další metody}
+Následuje seznam některých dalších metod se stručným popisem. Seznam nelze brát jako úplný, jelikož se toto, relativně mladé, odvětví stále vyvíjí a neustále vzniká mnoho modifikací původních algoritmů, hybridní metody či
+přístupy zcela nové.
+
+\begin{description}
+\item[Optimalizace včelím rojem (BCO)] je\dots 
+\item[Optimalizace hejnem světlušek (GSO)] je\dots
+\item[Stochastic diffusion search (SDS)] je\dots
+\end{description}
+
 
 \subsection{Otázky}
 \begin{enumerate}
   \item Popište typy úloh, pro které se vyplatí využít algoritmy založené na inteligenci roje.
   \item Vyjmenujte a stručně popište alespoň tři algoritmy používané v optimalizaci inteligencí roje.
-  \item TODO 
+  \item %TODO 
   \item 
 \end{enumerate}
 
