@@ -210,8 +210,9 @@ nějaké účelové funkce. Mnoho teoretických úloh i úloh z reálného svět
 optimalizace. Jako reálné příklady můžeme uvést plánování odjezdů vlaků ({\it train scheduling}),
 vytváření rozvrhů ({\it timetabling}), optimalizaci tvarů ({\it shape optimization}), návrh
 telekomunikačních sítí či problémy z výpočetní biologie ({\it computational biology}). Mnoho
-těchto problému bylo zobecněno například na {\it problém obchodního cestujícího} (TSP),
-což je známý  {\it NP-těžký} problém kombinatorické optimalizace \cite{Blum08SwarmOpt}.
+těchto problému bylo zobecněno na nějaký známý, {\it NP-těžký} problém, jako je například {\it problém
+obchodního cestujícího} (TSP), což je jeden z nejznámějších {\it NP-těžkých} problémů kombinatorické
+optimalizace \cite{Blum08SwarmOpt}.
 
 %\medskip
 \subsection{Úvod}
@@ -229,7 +230,8 @@ $f(s)\leq f(s^{\prime}),\forall s^{\prime}\in S$ (v případě, že chceme úče
 minimalizovat), či $f(s)\geq f(s^{\prime}),\forall s^{\prime}\in S$ (v případě, že ji chceme
 maximalizovat). V reálných problémech se často můžeme setkat s optimalizací několika účelových
 funkcí zároveň ({\it víceúčelová optimalizace}), hledání více než jednoho optima účelové funkce
-({\it multimodální optimalizace}), či optimalizací {\it dynamickou} \cite{Blum08SwarmOpt}.
+({\it multimodální optimalizace}), či optimalizací {\it dynamickou} (schopnost adaptace na změnu
+optima v čase) \cite{Blum08SwarmOpt}.
 
 \subsubsection{Metody optimalizace}
 %\medskip
@@ -244,7 +246,6 @@ velmi dlouhým výpočetním časům. Proto je stále vetší pozornost věnová
 lze zařadit i algoritmy inspirované inteligencí roje. Sice u nich nemáme jistotu nalezení
 optimálního řešení, na druhou stranu ale nalezneme řešení alespoň blízké optimálnímu, a to ve
 významně zkráceném čase (prohledávací prostor není obvykle prohledán celý) \cite{Blum08SwarmOpt}.
-%TODO jeste neco o spojite? nebo napsat ze ji tu neresime?
 
 Aproximační metody můžeme rozdělit na {\it lokální prohledávání} (iterativní zlepšování počátečního
 řešení až do uváznutí v lokálním extrému) a {\it konstruktivní algoritmy} (budování řešení s využitím
@@ -252,6 +253,7 @@ heuristické znalosti). Metody inteligence roje jsou rozšířením tradičních
 schopnost využití zkušeností získaných v průběhu řešení daného problému (tzv. {\it metaheuristiky}).
 Zde můžeme zařadit například i evoluční algoritmy. %TODO upravit
 %heuristiky vs metaheuristiky
+%TODO jeste neco o spojite? nebo napsat ze ji tu neresime?
 
 \subsubsection{Přínos inteligence roje v optimalizaci}
 
@@ -280,7 +282,7 @@ inteligencí roje (konkrétně hledáním potravy u mravenců, viz \ref{sub:biol
 \dots
 
 \subsubsection{Další využití}
-\dots
+
 
 
 %TODO Srovnání s genetickými algoritmy?
@@ -288,7 +290,7 @@ inteligencí roje (konkrétně hledáním potravy u mravenců, viz \ref{sub:biol
 \subsection{Optimalizace hejnem částic (PSO)}
 %Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
 Optimalizace hejnem částic je populačně založená stochastická optimalizační metoda inspirovaná
-shlukováním zvířat či hmyzu (například hejny ptáků nebo ryb). PSO optimalizuje problém\dots
+shlukováním zvířat či hmyzu (například hejna ptáků či ryb). PSO optimalizuje problém\dots
 
 
 \subsubsection{Vznik metody}
@@ -298,7 +300,16 @@ shlukováním zvířat či hmyzu (například hejny ptáků nebo ryb). PSO optim
 \dots
 
 \subsubsection{Využití}
-\dots
+Optimalizace algoritmy PSO má široké využití -- od klasických problémů, jako je plánování, TSP,
+trénování neuronových sítí či {\it assignment problem}, až po vysoce
+specializované aplikace, jako je {\it reactive power} a {\it voltage control}, {\it biomedical image registration},
+či dokonce skládání hudby. V posledních letech byly metody PSO taky oblíbené ve víceúčelové a dynamické optimalizaci.
+%TODO metody cesky (jak prelozit? co jsou zac?)
+
+Jednou z prvních aplikací metod PSO byl vývoj metod učení neuronových sítí. PSO bylo využito jako náhrada
+tradičního {\it back-propagation} algoritmu pro učení vícevrstvého perceptronu. Díky rychlé konvergenci může
+užití PSO v trénování neuronových sítí ušetřit značný výpočetní čas ve srovnání s jinými
+optimalizačními metodami.
 
 
 %\subsection{Stochastic diffusion search (SDS)}
@@ -309,10 +320,24 @@ shlukováním zvířat či hmyzu (například hejny ptáků nebo ryb). PSO optim
 Následuje seznam některých dalších metod se stručným popisem. Seznam nelze brát jako úplný, jelikož se toto, relativně mladé, odvětví stále vyvíjí a neustále vzniká mnoho modifikací původních algoritmů, hybridní metody či
 přístupy zcela nové.
 
-\begin{description}
-\item[Optimalizace včelím rojem (BCO)] je\dots 
-\item[Optimalizace hejnem světlušek (GSO)] je\dots
-\item[Stochastic diffusion search (SDS)] je\dots
+\begin{description} %TODO jine formatovani? - subsubsection?, paragraph?
+
+\item[Optimalizace včelím rojem (BCO)] zahrnuje celou skupinu algoritmů, které se inspirují chováním včel.
+Zásadní roli zde hraje přímá výměna informace mezi jednotlivými včelami na rozdíl od užití feromonu mravenčí
+kolonií. Obvykle je roj rozdělen na specializované skupiny: královny, průzkumné včely vyhledávající nové zdroje
+potravy, včely následující úspěšné průzkumné včely a podobně. ({\bf z wiki - upravit})
+
+\item[Optimalizace hejnem světlušek (GSO)] je metoda, ve které její autoři vybavují  každého člena hejna
+virtuální svítivou látkou (luciferin) v závislosti na jeho úspěšnosti při procházení prohledávacím prostorem.
+Čím úspěšnější, tím více září a přitahuje ke své pozici ostatní světlušky. U každé světlušky se zároveň
+předpokládá omezená vzdálenost, kam až dohlédne. Tato vzdálenost se i dynamicky vyvíjí a algoritmus dosahuje
+zajímavých výsledků při multimodální optimalizaci. ({\bf z wiki - upravit})
+
+\item[Stochastic diffusion search (SDS)] je metoda, která oproti ACO využívá přímou ({\it one-to-one}) komunikaci
+mezi agenty (inspirovanou jedním druhem mravenců). {\it Agents perform cheap, partial evaluations of a hypothesis (a candidate solution to the search problem). They then share information about hypotheses (diffusion of information) through direct one-to-one communication. As a result of the diffusion mechanism, high-quality solutions can be identified from clusters of agents with the same hypothesis. The operation of SDS is most easily understood by means of a simple analogy – The Restaurant Game.} ({\bf z wiki - prelozit, upravit, popis hry?})
+
+\item[Co vybrat dál?] A kolik \dots ? \url{http://en.wikipedia.org/wiki/Swarm_intelligence}
+
 \end{description}
 
 
@@ -320,8 +345,8 @@ přístupy zcela nové.
 \begin{enumerate}
   \item Popište typy úloh, pro které se vyplatí využít algoritmy založené na inteligenci roje.
   \item Vyjmenujte a stručně popište alespoň dva algoritmy používané v optimalizaci inteligencí roje.
-  \item %TODO 
-  \item 
+  \item Popište nějakou konkrétní úlohu, pro jejíž řešení se využívá (či dá využít) algoritmů ACO.
+  \item Popište nějakou konkrétní úlohu, pro jejíž řešení se využívá (či dá využít) algoritmů PSO.
 \end{enumerate}
 
 \newpage
