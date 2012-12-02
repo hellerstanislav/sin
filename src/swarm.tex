@@ -213,7 +213,8 @@ telekomunikačních sítí či problémy z výpočetní biologie ({\it computati
 těchto problému bylo zobecněno například na {\it problém obchodního cestujícího} (TSP),
 což je známý  {\it NP-těžký} problém kombinatorické optimalizace \cite{Blum08SwarmOpt}.
 
-\medskip
+%\medskip
+\subsection{Úvod}
 
 Obecně můžeme optimalizační problém $\mathcal{P}$ definovat jako trojici $(S,\omega,f)$, kde $S$
 je prohledávací prostor definovaný na konečné množině proměnných $X_i,i=1,\dots,n$ (přípustná
@@ -230,7 +231,8 @@ maximalizovat). V reálných problémech se často můžeme setkat s optimalizac
 funkcí zároveň ({\it víceúčelová optimalizace}), hledání více než jednoho optima účelové funkce
 ({\it multimodální optimalizace}), či optimalizací {\it dynamickou} \cite{Blum08SwarmOpt}.
 
-\medskip
+\subsubsection{Metody optimalizace}
+%\medskip
 
 Vzhledem k praktické důležitosti optimalizačních problémů bylo na jejich řešení vyvinuto mnoho
 algoritmů. V kontextu kombinatorické optimalizace můžeme tyto algoritmy klasifikovat na úplné a
@@ -251,11 +253,13 @@ schopnost využití zkušeností získaných v průběhu řešení daného probl
 Zde můžeme zařadit například i evoluční algoritmy. %TODO upravit
 %heuristiky vs metaheuristiky
 
+\subsubsection{Přínos inteligence roje v optimalizaci}
+
 Významným přínosem technik inteligence roje je oproti jiným metodám obvykle vetší rychlost, nízká
 výpočetní náročnost a schopnost poskytnout alespoň přibližné řešení tam, kde nám často ani není známo,
 zda existuje nějaký exaktní postup, jak řešení najít. %TODO rozvest, overit
 
-\medskip
+%\medskip
 
 Dvě nejvýznamnější techniky pro získání přibližných řešení v rozumném čase jsou optimalizace mravenčí
 kolonií ({\it ant colony optimization}) a optimalizace hejnem částic ({\it particle swarm optimization}).
@@ -315,7 +319,7 @@ přístupy zcela nové.
 \subsection{Otázky}
 \begin{enumerate}
   \item Popište typy úloh, pro které se vyplatí využít algoritmy založené na inteligenci roje.
-  \item Vyjmenujte a stručně popište alespoň tři algoritmy používané v optimalizaci inteligencí roje.
+  \item Vyjmenujte a stručně popište alespoň dva algoritmy používané v optimalizaci inteligencí roje.
   \item %TODO 
   \item 
 \end{enumerate}
