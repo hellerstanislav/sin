@@ -253,7 +253,7 @@ heuristické znalosti). Metody inteligence roje jsou rozšířením tradičních
 schopnost využití zkušeností získaných v průběhu řešení daného problému (tzv. {\it metaheuristiky}).
 Zde můžeme zařadit například i evoluční algoritmy. %TODO upravit
 %heuristiky vs metaheuristiky
-%TODO jeste neco o spojite? nebo napsat ze ji tu neresime?
+%TODO jeste neco o spojite?
 
 \subsubsection{Přínos inteligence roje v optimalizaci}
 
@@ -270,20 +270,31 @@ kolonií ({\it ant colony optimization}) a optimalizace hejnem částic ({\it pa
 \subsection{Optimalizace mravenčí kolonií (ACO)}
 %Pro algoritmy typu ACO bude vhodné využít \cite{Dorigo06antcolony}.
 Optimalizace mravenčí kolonií byla jedna z prvních technik aproximační optimalizace inspirovaná
-inteligencí roje (konkrétně hledáním potravy u mravenců, viz \ref{sub:biolzakl}).
-
-\subsubsection{Vznik metody}
-\dots
+inteligencí roje (konkrétně hledáním potravy u mravenců, viz kap. \ref{sub:biolzakl}).
 
 \subsubsection{Princip}
 \dots
 
 \subsubsection{Aplikace na TSP}
-\dots
+Mnoho aplikací ACO algoritmů je nejčastěji na NP-těžké problémy. Jako příklad si ukážeme konkrétní
+aplikaci na problém obchodního cestujícího.
+
+\subsubsection{Algoritmy}
+\paragraph{Ant System (AS)} {}
+\paragraph{Ant Colony System(ACS)} {}
+%\paragraph{MAX - MIN Ant System (MMAS)} {}
 
 \subsubsection{Další využití}
+Z dalších klasických NP-těžkých optimalizačních problému můžeme jmenovat vytváření rozvrhů,
+barvení grafů, problém maximální kliky v grafu či problém směrování vozidel ({\it vehicle routing problem}).
+Praktické aplikace obsahují například
+umisťování součástek v návrhu obvodů, směrování v komunikačních sítích a jejich návrh či různé problémy
+z bioinformatiky.
+Výzkum se dále zaměřuje na použití ACO ve víceúčelové, dynamické a stochastické optimalizaci.
 
-
+Algoritmy ACO sloužily původně k řešení diskrétních optimalizačních problémů. Čím dál větší pozornost je
+ale věnována jejich adaptaci i na spojité optimalizační problémy (například {\it Continous ACO}).
+Avšak tyto přístupy se od původní metody konceptuálně velmi liší.
 
 %TODO Srovnání s genetickými algoritmy?
 
@@ -293,15 +304,15 @@ Optimalizace hejnem částic je populačně založená stochastická optimaliza�
 shlukováním zvířat či hmyzu (například hejna ptáků či ryb). PSO optimalizuje problém\dots
 
 
-\subsubsection{Vznik metody}
-\dots
-
 \subsubsection{Princip}
 \dots
 
+%\subsubsection{Algoritmy}
+%\dots
+
 \subsubsection{Využití}
 Optimalizace algoritmy PSO má široké využití -- od klasických problémů, jako je plánování, TSP,
-trénování neuronových sítí či {\it assignment problem}, až po vysoce
+trénování neuronových sítí či problémy přiřazení ({\it assignment problems}), až po vysoce
 specializované aplikace, jako je {\it reactive power} a {\it voltage control}, {\it biomedical image registration},
 či dokonce skládání hudby. V posledních letech byly metody PSO taky oblíbené ve víceúčelové a dynamické optimalizaci.
 %TODO metody cesky (jak prelozit? co jsou zac?)
@@ -334,7 +345,7 @@ předpokládá omezená vzdálenost, kam až dohlédne. Tato vzdálenost se i dy
 zajímavých výsledků při multimodální optimalizaci. ({\bf z wiki - upravit})
 
 \item[Stochastic diffusion search (SDS)] je metoda, která oproti ACO využívá přímou ({\it one-to-one}) komunikaci
-mezi agenty (inspirovanou jedním druhem mravenců). {\it Agents perform cheap, partial evaluations of a hypothesis (a candidate solution to the search problem). They then share information about hypotheses (diffusion of information) through direct one-to-one communication. As a result of the diffusion mechanism, high-quality solutions can be identified from clusters of agents with the same hypothesis. The operation of SDS is most easily understood by means of a simple analogy – The Restaurant Game.} ({\bf z wiki - prelozit, upravit, popis hry?})
+mezi agenty (inspirovanou jiným druhem mravenců). {\it Agents perform cheap, partial evaluations of a hypothesis (a candidate solution to the search problem). They then share information about hypotheses (diffusion of information) through direct one-to-one communication. As a result of the diffusion mechanism, high-quality solutions can be identified from clusters of agents with the same hypothesis. The operation of SDS is most easily understood by means of a simple analogy – The Restaurant Game.} ({\bf z wiki - prelozit, upravit, popis té hry?})
 
 \item[Co vybrat dál?] A kolik \dots ? \url{http://en.wikipedia.org/wiki/Swarm_intelligence}
 
