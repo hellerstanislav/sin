@@ -288,7 +288,7 @@ aplikaci na problém obchodního cestujícího.
 Z dalších klasických NP-těžkých optimalizačních problému můžeme jmenovat vytváření rozvrhů,
 barvení grafů, problém maximální kliky v grafu či problém směrování vozidel ({\it vehicle routing problem}).
 Praktické aplikace obsahují například
-umisťování součástek v návrhu obvodů, směrování v komunikačních sítích a jejich návrh či různé problémy
+umisťování součástek v návrhu obvodů, směrování v komunikačních sítích a jejich návrh, či různé problémy
 z bioinformatiky.
 Výzkum se dále zaměřuje na použití ACO ve víceúčelové, dynamické a stochastické optimalizaci.
 
@@ -301,21 +301,52 @@ Avšak tyto přístupy se od původní metody konceptuálně velmi liší.
 \subsection{Optimalizace hejnem částic (PSO)}
 %Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
 Optimalizace hejnem částic je populačně založená stochastická optimalizační metoda inspirovaná
-shlukováním zvířat či hmyzu (například hejna ptáků či ryb). PSO optimalizuje problém\dots
+shlukováním zvířat či hmyzu (například hejna ptáků, ryb, apod.). Poprvé byla představena roku 1995 a od té doby
+její popularita rostla hlavně díky schopnosti robustního a efektivního řešení složitých optimalizačních problémů.
+Mezi její hlavní výhody patří rychlá konvergence k optimu pro širokou škálu účelových funkcí a snadná implementace.
+
+V PSO reprezentuje potenciální řešení hejno částic, které se pohybuje prohledávacím prostorem a hledá
+optimální (či alespoň dostatečně dobré) řešení. Každá částice je definována svojí polohou, rychlostí a pamětí
+předchozích úspěchů při hledání. Částice si vyměňují svou aktuální pozici se sousedními částicemi.
+Pozice každé částice je upravována na základě její aktuální rychlosti a rozdílu mezi její aktuální pozicí, resp.
+nejlepší nalezenou pozicí jejími sousedy (částice jsou ovlivňovány úspěšnějšími částicemi), a nejlepší pozicí,
+kterou zatím sama našla. Jak model iteruje, hejno se zaměřuje stále více a více na oblast prohledávacího
+prostoru, která obsahuje velmi dobrá řešení.
+
+Princip PSO je podobný {\it celulárním automatům} (CA) -- částice jsou analogické buňkám CA, jejichž stav je
+aktualizován ve více dimenzích současně.
 
 
 \subsubsection{Princip}
-\dots
+Rychlost každé částice je iterativně upravována její nejlepší pozicí, kterou sama zatím našla, a nejlepší
+pozicí nalezenou částicemi v jejím okolí. Symbolem $v_i$ označíme rychlost {\it i}-té částice hejna, symbolem
+$x_i$ její pozici, symbol $p_i$ bude označovat její nejlepší pozici a symbol $p_g$ nejlepší pozici nalezenou
+částicemi v jejím okolí. V originálním PSO algoritmu jsou $v_i$ a $x_i$, pro $i=1,\dots,n$, aktualizovány
+podle rovnic:
+\begin{eqnarray}
+v_i & \leftarrow & v+\varphi_1\otimes(p_i-x_i)+\varphi_2\otimes(p_g-x_i), \label{eqn:pso1} \\
+x_i & \leftarrow & x_i + v_i, \label{eqn:pso2}
+\end{eqnarray}
+kde $\varphi_1=c_1R_1$ a $\varphi_2=c_2R_2$. $R_1$ a $R_2$ jsou dvě funkce, z nichž každá vrací vektor skládající
+se z náhodných hodnot generovaných rovnoměrným rozložením v rozsahu [0,1], $c_1$ a $c_2$ jsou koeficienty
+akcelerace a symbol $\otimes$ označuje násobení vektorů po složkách. Rovnice \ref{eqn:pso1} ukazuje, že rychlost
+částice $v_1$ je určována třemi jednotlivými částmi -- "hybností", "poznávací" částí a částí "sociální".
+Hybnost $v_i$ reprezentuje předchozí rychlost částice, která\dots
 
-%\subsubsection{Algoritmy}
+Pozice $p_g$ sociální části je\dots
+
+%\subsubsection{Varianty} % - ???
 %\dots
 
 \subsubsection{Využití}
 Optimalizace algoritmy PSO má široké využití -- od klasických problémů, jako je plánování, TSP,
 trénování neuronových sítí či problémy přiřazení ({\it assignment problems}), až po vysoce
-specializované aplikace, jako je {\it reactive power} a {\it voltage control}, {\it biomedical image registration},
-či dokonce skládání hudby. V posledních letech byly metody PSO taky oblíbené ve víceúčelové a dynamické optimalizaci.
-%TODO metody cesky (jak prelozit? co jsou zac?)
+specializované aplikace, jako je {\it reactive power and voltage
+control}\footnote{\url{http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=00898095}},
+{\it biomedical image registration},
+či komponování hudby. V posledních letech byly metody PSO (jejich varianty) oblíbené také ve víceúčelové
+a dynamické optimalizaci.
+%TODO metody cesky (jak prelozit? co jsou zac?) http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=00898095
 
 Jednou z prvních aplikací metod PSO byl vývoj metod učení neuronových sítí. PSO bylo využito jako náhrada
 tradičního {\it back-propagation} algoritmu pro učení vícevrstvého perceptronu. Díky rychlé konvergenci může
@@ -328,8 +359,9 @@ optimalizačními metodami.
 %Další zdroje?
 
 \subsection{Další metody}
-Následuje seznam některých dalších metod se stručným popisem. Seznam nelze brát jako úplný, jelikož se toto, relativně mladé, odvětví stále vyvíjí a neustále vzniká mnoho modifikací původních algoritmů, hybridní metody či
-přístupy zcela nové.
+Následuje seznam některých dalších metod optimalizace inteligencí roje se stručným popisem. Seznam nelze brát
+jako úplný, jelikož se toto, relativně mladé, odvětví stále vyvíjí a neustále vzniká mnoho modifikací
+původních algoritmů, hybridní metody či přístupy zcela nové.
 
 \begin{description} %TODO jine formatovani? - subsubsection?, paragraph?
 
