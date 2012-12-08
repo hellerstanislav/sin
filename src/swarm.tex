@@ -8,6 +8,7 @@
 \usepackage{wrapfig}
 \usepackage{verbatim} 
 \usepackage[unicode]{hyperref}
+\usepackage[czech,ruled,longend]{algorithm2e}
 
 \setlength{\hoffset}{-1.3cm} % 1.7
 \setlength{\voffset}{-2cm} % 2
@@ -301,7 +302,8 @@ Avšak tyto přístupy se od původní metody konceptuálně velmi liší.
 \subsection{Optimalizace hejnem částic (PSO)}
 %Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
 Optimalizace hejnem částic je populačně založená stochastická optimalizační metoda inspirovaná
-shlukováním zvířat či hmyzu (například hejna ptáků, ryb, apod.). Poprvé byla představena roku 1995 a od té doby
+shlukováním zvířat či hmyzu (například hejna ptáků, ryb, apod.). Poprvé byla představena roku 1995 jako metoda
+pro spojitou optimalizaci a od té doby
 její popularita rostla hlavně díky schopnosti robustního a efektivního řešení složitých optimalizačních problémů.
 Mezi její hlavní výhody patří rychlá konvergence k optimu pro širokou škálu účelových funkcí a snadná implementace.
 
@@ -324,29 +326,61 @@ $x_i$ její pozici, symbol $p_i$ bude označovat její nejlepší pozici a symbo
 částicemi v jejím okolí. V originálním PSO algoritmu jsou $v_i$ a $x_i$, pro $i=1,\dots,n$, aktualizovány
 podle rovnic:
 \begin{eqnarray}
-v_i & \leftarrow & v+\varphi_1\otimes(p_i-x_i)+\varphi_2\otimes(p_g-x_i), \label{eqn:pso1} \\
+v_i & \leftarrow & v_i+\varphi_1\otimes(p_i-x_i)+\varphi_2\otimes(p_g-x_i), \label{eqn:pso1} \\
 x_i & \leftarrow & x_i + v_i, \label{eqn:pso2}
 \end{eqnarray}
 kde $\varphi_1=c_1R_1$ a $\varphi_2=c_2R_2$. $R_1$ a $R_2$ jsou dvě funkce, z nichž každá vrací vektor skládající
 se z náhodných hodnot generovaných rovnoměrným rozložením v rozsahu [0,1], $c_1$ a $c_2$ jsou koeficienty
 akcelerace a symbol $\otimes$ označuje násobení vektorů po složkách. Rovnice \ref{eqn:pso1} ukazuje, že rychlost
-částice $v_1$ je určována třemi jednotlivými částmi -- "hybností", "poznávací" částí a částí "sociální".
-Hybnost $v_i$ reprezentuje předchozí rychlost částice, která\dots
+částice $v_i$ je určována třemi částmi -- {\it hybností}, částí {\it poznávací} a částí {\it sociální}. Hybnost $v_i$
+reprezentuje předchozí rychlost částice, která částici dostala na současné místo; poznávací část
+$\varphi_1\otimes(p_i-x_i)$ reprezentuje tendenci částice vracet se na nejlepší pozici, kterou zatím našla a
+sociální část $\varphi_2\otimes(p_g-x_i)$ reprezentuje tendenci částice být přitahována k nejlepší pozici, kterou zatím našlo hejno jako celek.
 
-Pozice $p_g$ sociální části je\dots
+Průběh základní verze PSO ukazuje algoritmus \ref{alg:pso}.
+Na obrázku \ref{fig:psovec} lze vidět vizualizaci jednotlivých částí rovnice \ref{eqn:pso1} ve formě
+vektorů a následnou aktualizovanou pozici $x_i$. Váha $\omega$, kterou je upravována hodnota $v_i$, je
+probrána v následující části.
 
-%\subsubsection{Varianty} % - ???
-%\dots
+\begin{algorithm}[here]
+  \DontPrintSemicolon
+  \SetAlgoNoLine
+  Náhodně vygeneruj počáteční stav hejna\;
+  \Repeat{\textnormal{je splněno ukončující kritérium}}{
+    \For{\textnormal{každou částici} i}{
+      \lIf{$f(x_i)>f(p_i)$}{$p_i\leftarrow x_i$}\;
+      $p_g$ = max($p_{sousedi}$)\;
+      Aktualizuj rychlost (viz rovnice \ref{eqn:pso1})\;
+      Aktualizuj pozici (viz rovnice \ref{eqn:pso2})
+    }
+  }
+\caption{Základní verze algoritmu PSO (provádí se maximalizace)\label{alg:pso}}
+\end{algorithm}
+
+\begin{figure}[here]
+  \centering
+  \includegraphics[width=8cm]{./img/pso_vectors.png}
+  \caption{Části PSO jako vektory (TODO překreslit).}
+  \label{fig:psovec}
+\end{figure}
+
+\subsubsection{Varianty}
+Topologie sousedů, inerciální váha a velocity clamping\dots
+
+\medskip
+
+Existuje mnoho dalších variant PSO, např. rozšíření o využití nad binárními prohledávacími prostory, možnost diskrétní či kombinované optimalizace, adaptivní verze algoritmů, víceúčelová optimalizace, aj.
+
 
 \subsubsection{Využití}
 Optimalizace algoritmy PSO má široké využití -- od klasických problémů, jako je plánování, TSP,
 trénování neuronových sítí či problémy přiřazení ({\it assignment problems}), až po vysoce
 specializované aplikace, jako je {\it reactive power and voltage
 control}\footnote{\url{http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=00898095}},
-{\it biomedical image registration},
-či komponování hudby. V posledních letech byly metody PSO (jejich varianty) oblíbené také ve víceúčelové
+{\it biomedical image registration}\footnote{\url{http://pdf.aminer.org/001/098/431/an_approach_to_multimodal_biomedical_image_registration_utilizing_particle_swarm.pdf}},
+či například i komponování hudby. V posledních letech byly metody PSO (jejich varianty) oblíbené také ve víceúčelové
 a dynamické optimalizaci.
-%TODO metody cesky (jak prelozit? co jsou zac?) http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=00898095
+%TODO metody cesky (jak prelozit?), jeste metody upravit (zobecnit apod)
 
 Jednou z prvních aplikací metod PSO byl vývoj metod učení neuronových sítí. PSO bylo využito jako náhrada
 tradičního {\it back-propagation} algoritmu pro učení vícevrstvého perceptronu. Díky rychlé konvergenci může
@@ -379,7 +413,7 @@ zajímavých výsledků při multimodální optimalizaci. ({\bf z wiki - upravit
 \item[Stochastic diffusion search (SDS)] je metoda, která oproti ACO využívá přímou ({\it one-to-one}) komunikaci
 mezi agenty (inspirovanou jiným druhem mravenců). {\it Agents perform cheap, partial evaluations of a hypothesis (a candidate solution to the search problem). They then share information about hypotheses (diffusion of information) through direct one-to-one communication. As a result of the diffusion mechanism, high-quality solutions can be identified from clusters of agents with the same hypothesis. The operation of SDS is most easily understood by means of a simple analogy – The Restaurant Game.} ({\bf z wiki - prelozit, upravit, popis té hry?})
 
-\item[Co vybrat dál?] A kolik \dots ? \url{http://en.wikipedia.org/wiki/Swarm_intelligence}
+\item[Vybrat ještě něco?] \url{http://en.wikipedia.org/wiki/Swarm_intelligence}
 
 \end{description}
 
