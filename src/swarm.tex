@@ -205,7 +205,9 @@ většiny a informovaných vůdců.
 
 \section{Inteligence roje v optimalizaci}
 %Obecné kecy o optimalizaci...
-Inteligence roje má v optimalizaci jedno z nejdůležitějších využití. Optimalizací rozumíme řešení
+Inteligence roje má v optimalizaci jedno z nejdůležitějších využití
+\footnote{Pokud není uvedeno jinak, veškerý materiál k textu této kapitoly je čerpán z \cite{Blum08SwarmOpt}.}.
+Optimalizací rozumíme řešení
 nějakého {\it optimalizačního problému}, který se skládá z hledání optima (maxima či minima)
 nějaké účelové funkce. Mnoho teoretických úloh i úloh z reálného světa vede právě na řešení úlohy
 optimalizace. Jako reálné příklady můžeme uvést plánování odjezdů vlaků ({\it train scheduling}),
@@ -213,16 +215,17 @@ vytváření rozvrhů ({\it timetabling}), optimalizaci tvarů ({\it shape optim
 telekomunikačních sítí či problémy z výpočetní biologie ({\it computational biology}). Mnoho
 těchto problému bylo zobecněno na nějaký známý, {\it NP-těžký} problém, jako je například {\it problém
 obchodního cestujícího} (TSP), což je jeden z nejznámějších {\it NP-těžkých} problémů kombinatorické
-optimalizace \cite{Blum08SwarmOpt}.
+optimalizace.
 
 %\medskip
 \subsection{Úvod}
 
 Obecně můžeme optimalizační problém $\mathcal{P}$ definovat jako trojici $(S,\omega,f)$, kde $S$
-je prohledávací prostor definovaný na konečné množině proměnných $X_i,i=1,\dots,n$ (přípustná
-množina), $\omega$ je množina omezujících podmínek nad těmito proměnnými a
-$f:S\rightarrow\mathbb{R}^{+}$ je účelová funkce, která přiřazuje ohodnocení každému prvku (neboli
-řešení) z $S$. Pokud mají proměnné diskrétní doménu (definiční obor), hovoříme o diskrétní
+je prohledávací prostor definovaný na konečné množině proměnných $X_i,i=1,\dots,n$ (kandidátní řešení),
+%přípustná množina, hypotézy?
+ $\omega$ je množina omezujících podmínek nad těmito proměnnými a
+$f:S\rightarrow\mathbb{R}^{+}$ je účelová funkce, která přiřazuje ohodnocení (fitness) každému prvku % (neboli řešení)
+z $S$. Pokud mají proměnné diskrétní doménu (definiční obor), hovoříme o diskrétní
 (kombinatorické) optimalizaci, v opačném případě hovoříme o optimalizaci spojité (existuje i
 kombinovaná).
 
@@ -232,7 +235,7 @@ minimalizovat), či $f(s)\geq f(s^{\prime}),\forall s^{\prime}\in S$ (v případ
 maximalizovat). V reálných problémech se často můžeme setkat s optimalizací několika účelových
 funkcí zároveň ({\it víceúčelová optimalizace}), hledání více než jednoho optima účelové funkce
 ({\it multimodální optimalizace}), či optimalizací {\it dynamickou} (schopnost adaptace na změnu
-optima v čase) \cite{Blum08SwarmOpt}.
+optima v čase). %stochastická, pravdepodobnostni?
 
 \subsubsection{Metody optimalizace}
 %\medskip
@@ -246,21 +249,28 @@ případě potřeboval exponenciální výpočetní čas, což by, vzhledem k pr
 velmi dlouhým výpočetním časům. Proto je stále vetší pozornost věnována metodám aproximačním, kam
 lze zařadit i algoritmy inspirované inteligencí roje. Sice u nich nemáme jistotu nalezení
 optimálního řešení, na druhou stranu ale nalezneme řešení alespoň blízké optimálnímu, a to ve
-významně zkráceném čase (prohledávací prostor není obvykle prohledán celý) \cite{Blum08SwarmOpt}.
+významně zkráceném čase (prohledávací prostor není obvykle prohledán celý).
 
-Aproximační metody můžeme rozdělit na {\it lokální prohledávání} (iterativní zlepšování počátečního
-řešení až do uváznutí v lokálním extrému) a {\it konstruktivní algoritmy} (budování řešení s využitím
-heuristické znalosti). Metody inteligence roje jsou rozšířením tradičních konstruktivních heuristik o
-schopnost využití zkušeností získaných v průběhu řešení daného problému (tzv. {\it metaheuristiky}).
-Zde můžeme zařadit například i evoluční algoritmy. %TODO upravit
-%heuristiky vs metaheuristiky
+Většinu metod inteligence roje lze zařadit mezi tzv. {\it metaheuristiky}, což je způsob optimalizace,
+kdy je snahou iterativně zlepšovat nějaké kandidátní řešení s ohledem na požadovanou kvalitu. Těmto
+metodám obvykle stačí velmi málo informací o řešeném problému a dokážou rychle prohledat velmi
+velký prostor kandidátních řešení. Mnoho metaheuristik implementuje nějakou formu stochastické
+optimalizace. Mezi metaheuristické metody patří například i evoluční algoritmy.
+%heuristiky vs metaheuristiky?
 %TODO jeste neco o spojite?
+
+%Aproximační metody můžeme rozdělit na {\it lokální prohledávání} (iterativní zlepšování počátečního
+%řešení až do uváznutí v lokálním extrému) a {\it konstruktivní algoritmy} (budování řešení s využitím
+%heuristické znalosti). Metody inteligence roje jsou rozšířením tradičních konstruktivních heuristik o
+%schopnost využití zkušeností získaných v průběhu řešení daného problému (tzv. {\it metaheuristiky}).
+%Zde můžeme zařadit například i evoluční algoritmy.
+
 
 \subsubsection{Přínos inteligence roje v optimalizaci}
 
-Významným přínosem technik inteligence roje je oproti jiným metodám obvykle vetší rychlost, nízká
+Významným přínosem technik inteligence roje je oproti jiným metodám obvykle velká rychlost, nízká
 výpočetní náročnost a schopnost poskytnout alespoň přibližné řešení tam, kde nám často ani není známo,
-zda existuje nějaký exaktní postup, jak řešení najít. %TODO rozvest, overit
+zda existuje nějaký exaktní postup, jak řešení najít. %TODO rozvest, overit a upravit
 
 %\medskip
 
@@ -297,13 +307,14 @@ Algoritmy ACO sloužily původně k řešení diskrétních optimalizačních pr
 ale věnována jejich adaptaci i na spojité optimalizační problémy (například {\it Continous ACO}).
 Avšak tyto přístupy se od původní metody konceptuálně velmi liší.
 
-%TODO Srovnání s genetickými algoritmy?
+%TODO Srovnání s genetickými algoritmy? (fitness? - i u PSO?)
 
 \subsection{Optimalizace hejnem částic (PSO)}
 %Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
 Optimalizace hejnem částic je populačně založená stochastická optimalizační metoda inspirovaná
-shlukováním zvířat či hmyzu (například hejna ptáků, ryb, apod.). Poprvé byla představena roku 1995 jako metoda
-pro spojitou optimalizaci a od té doby
+shlukováním zvířat či hmyzu (například hejna ptáků, ryb, apod.)
+\footnote{Pokud není uvedeno jinak, veškerý materiál k textu této kapitoly je čerpán z \cite{Blum08SwarmOpt}.}.
+Poprvé byla představena roku 1995 jako metoda pro spojitou optimalizaci a od té doby
 její popularita rostla hlavně díky schopnosti robustního a efektivního řešení složitých optimalizačních problémů.
 Mezi její hlavní výhody patří rychlá konvergence k optimu pro širokou škálu účelových funkcí a snadná implementace.
 
@@ -317,7 +328,6 @@ prostoru, která obsahuje velmi dobrá řešení.
 
 Princip PSO je podobný {\it celulárním automatům} (CA) -- částice jsou analogické buňkám CA, jejichž stav je
 aktualizován ve více dimenzích současně.
-
 
 \subsubsection{Princip}
 Rychlost každé částice je iterativně upravována její nejlepší pozicí, kterou sama zatím našla, a nejlepší
@@ -337,7 +347,8 @@ reprezentuje předchozí rychlost částice, která částici dostala na součas
 $\varphi_1\otimes(p_i-x_i)$ reprezentuje tendenci částice vracet se na nejlepší pozici, kterou zatím našla a
 sociální část $\varphi_2\otimes(p_g-x_i)$ reprezentuje tendenci částice být přitahována k nejlepší pozici, kterou zatím našlo hejno jako celek.
 
-Průběh základní verze PSO ukazuje algoritmus \ref{alg:pso}.
+Průběh základní verze PSO ukazuje algoritmus \ref{alg:pso}\footnote{Ohodnocení $f$ je získáno jednoduchým předáním
+kandidátního řešení účelové funkci.}.
 Na obrázku \ref{fig:psovec} lze vidět vizualizaci jednotlivých částí rovnice \ref{eqn:pso1} ve formě
 vektorů a následnou aktualizovanou pozici $x_i$. Váha $\omega$, kterou je upravována hodnota $v_i$, je
 probrána v následující části.
@@ -360,16 +371,32 @@ probrána v následující části.
 \begin{figure}[here]
   \centering
   \includegraphics[width=8cm]{./img/pso_vectors.png}
-  \caption{Části PSO jako vektory (TODO překreslit).}
+  \caption{Části PSO alg. jako vektory při aktualizaci pozice $x_i$ $i$-té částice.}  %TODO překreslit
   \label{fig:psovec}
 \end{figure}
 
 \subsubsection{Varianty}
-Topologie sousedů, inerciální váha a velocity clamping\dots
+Základní variantou algoritmu je volba topologie okolí při komunikaci částice s částicemi okolními (term $p_g$).
+Různé topologie upravují způsob propagace informací mezi částicemi a tím upravují vlastnosti algoritmu.
+Obecně můžeme topologie rozdělit na tyto dva modely:
+\begin{itemize}
+  \item model {\it gbest} (globální optima) -- komunikace není omezená (lze komunikovat i s celým hejnem) -- obecně lepší
+  pro jednodušší problémy (může trpět předčasnou konvergencí),
+  \item model {\it lbest} (lokální optima) -- částice komunikují pouze s omezeným okolím (vhodné pro komplexní problémy,
+  multimodální optimalizaci). Jako příklad můžeme uvést výběr okolí metodou {\it von Neumann} -- každá částice
+  komunikuje pouze se svými čtyřmi sousedy (čtvercová mřížka).
+\end{itemize}
+
+Dále můžeme zmínit např. omezování rychlosti $v_i$ ({\it velocity clamping}), které zabrání velkému nárůstu
+rychlosti částice, která může vést k opuštění prohledávacího prostoru částicí. Toto omezení tomu sice
+nutně nezabrání, ale alespoň omezí další divergenci částic. Pokročilejší metodou této úpravy je využití koeficientu
+$\omega$, tzv. {\it inerciální váhy}, která upravuje vliv předchozí rychlosti $v_i$ v rovnici \ref{eqn:pso1}
+(viz obrázek \ref{fig:psovec}). O tomto více v \cite{Blum08SwarmOpt}.
 
 \medskip
 
-Existuje mnoho dalších variant PSO, např. rozšíření o využití nad binárními prohledávacími prostory, možnost diskrétní či kombinované optimalizace, adaptivní verze algoritmů, víceúčelová optimalizace, aj.
+Existuje mnoho dalších variant PSO, např. rozšíření o využití nad binárními prohledávacími prostory, možnost
+diskrétní či kombinované optimalizace, adaptivní verze algoritmů, víceúčelová optimalizace, aj.
 
 
 \subsubsection{Využití}
@@ -402,18 +429,20 @@ původních algoritmů, hybridní metody či přístupy zcela nové.
 \item[Optimalizace včelím rojem (BCO)] zahrnuje celou skupinu algoritmů, které se inspirují chováním včel.
 Zásadní roli zde hraje přímá výměna informace mezi jednotlivými včelami na rozdíl od užití feromonu mravenčí
 kolonií. Obvykle je roj rozdělen na specializované skupiny: královny, průzkumné včely vyhledávající nové zdroje
-potravy, včely následující úspěšné průzkumné včely a podobně. ({\bf z wiki - upravit})
+potravy, včely následující úspěšné průzkumné včely a podobně. ({\bf z wiki - upravit?})
 
 \item[Optimalizace hejnem světlušek (GSO)] je metoda, ve které její autoři vybavují  každého člena hejna
 virtuální svítivou látkou (luciferin) v závislosti na jeho úspěšnosti při procházení prohledávacím prostorem.
 Čím úspěšnější, tím více září a přitahuje ke své pozici ostatní světlušky. U každé světlušky se zároveň
 předpokládá omezená vzdálenost, kam až dohlédne. Tato vzdálenost se i dynamicky vyvíjí a algoritmus dosahuje
-zajímavých výsledků při multimodální optimalizaci. ({\bf z wiki - upravit})
+zajímavých výsledků při multimodální optimalizaci. ({\bf z wiki - upravit?})
 
 \item[Stochastic diffusion search (SDS)] je metoda, která oproti ACO využívá přímou ({\it one-to-one}) komunikaci
-mezi agenty (inspirovanou jiným druhem mravenců). {\it Agents perform cheap, partial evaluations of a hypothesis (a candidate solution to the search problem). They then share information about hypotheses (diffusion of information) through direct one-to-one communication. As a result of the diffusion mechanism, high-quality solutions can be identified from clusters of agents with the same hypothesis. The operation of SDS is most easily understood by means of a simple analogy – The Restaurant Game.} ({\bf z wiki - prelozit, upravit, popis té hry?})
+mezi agenty (inspirovanou jiným druhem mravenců). {\it Agents perform cheap, partial evaluations of a hypothesis (a candidate solution to the search problem). They then share information about hypotheses (diffusion of information) through direct one-to-one communication. As a result of the diffusion mechanism, high-quality solutions can be identified from clusters of agents with the same hypothesis. The operation of SDS is most easily understood by means of a simple analogy – The Restaurant Game. \footnote{\url{http://www.doc.gold.ac.uk/~mas02mb/sdp/index.htm}}}
+% http://www.doc.gold.ac.uk/~mas02mb/sdp/index.htm
+% ({\bf z wiki - prelozit, upravit, popis té hry?})
 
-\item[Vybrat ještě něco?] \url{http://en.wikipedia.org/wiki/Swarm_intelligence}
+%\item[(Vybrat ještě něco?] \url{http://en.wikipedia.org/wiki/Swarm_intelligence})
 
 \end{description}
 
