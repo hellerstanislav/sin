@@ -9,6 +9,7 @@
 \usepackage{verbatim} 
 \usepackage[unicode]{hyperref}
 \usepackage[czech,ruled,longend]{algorithm2e}
+\usepackage{subcaption}
 
 \setlength{\hoffset}{-1.3cm} % 1.7
 \setlength{\voffset}{-2cm} % 2
@@ -79,7 +80,7 @@ systémů a kybernetiky. Často jsou v souvislosti se samoorganizací zmiňován
 {\it pozitivní a negativní zpětná vazba}, které jsou základem většiny samoorganizujících
 se systémů.
 
-\begin{define}
+\begin{define} \label{def:stig}
   {\bf Stigmergie} je mechanismus komunikace, kde si jedinci nepředávají informace přímo,
   ale pouze nepřímo přes prostředí. \cite[s.6]{Heylighen99}
 \end{define}
@@ -105,15 +106,64 @@ nezbytné pro pochopení problematiky, avšak se zřetelem na technické, nikoli
 zaměření tohoto učebního textu.
 
 \paragraph{Mravenci: hledání potravy.}
-Při vyhledávání potravy mravenci využívají stigmergický přístup ke komunikaci. Pokud mravenec
-nalezne zdroj potravy, na cestě zpět zanechává na zemi substanci, která je nazývána {\it feromon}.
-Ostatní mravenci cítí přítomnost feromonů a mají tendenci sledovat cestu, na které je koncentrace
-feromonů vyšší \cite{Dorigo06antcolony}. Pokud po jedné cestě projde více mravenců, tím více po
-sobě zanechají feromonů a tím spíše po této trase půjde větší počet mravenců v budoucnosti.
+%Při vyhledávání potravy mravenci využívají stigmergický přístup ke komunikaci. Pokud mravenec
+%nalezne zdroj potravy, na cestě zpět zanechává na zemi substanci, která je nazývána {\it feromon}.
+%Ostatní mravenci cítí přítomnost feromonů a mají tendenci sledovat cestu, na které je koncentrace
+%feromonů vyšší \cite{Dorigo06antcolony}. Pokud po jedné cestě projde více mravenců, tím více po
+%sobě zanechají feromonů a tím spíše po této trase půjde větší počet mravenců v budoucnosti.
 
-Feromonová stopa ale po čase mizí; tomuto procesu říkáme {\it vypařování}. Tímto mechanismem se
+%Feromonová stopa ale po čase mizí; tomuto procesu říkáme {\it vypařování}. Tímto mechanismem se
+%mravenci dokáží velmi rychle a efektivně přizpůsobovat změnám podmínek - např. pokud zdroj
+%potravy zmizel či pokud na cestě za potravou vznikla překážka.
+
+Při vyhledávání potravy mají mravenci schopnost najít nejkratší cestu od zdroje potravy k mraveništi,
+a to díky využití stigmergického přístupu ke komunikaci\,--\,zanechávají v prostředí
+feromonové stopy, které pak mají tendenci s větší pravděpodobností následovat. Roku 1990 zkoumal
+Deneubourg a kol. toto
+chování\footnote{Konkrétně u druhu {\it Linepithema humile}.} pomocí experimentů -- mravenci byli od potravy
+odděleni dvěma mosty. Obrázek \ref{alg:aco} popisuje chování mravenců zjištěné v experimentu při rozdílné
+délce těchto mostů. Při stejné délce volí mravenci cesty náhodně, ale díky náhodným fluktuacím po čase
+jedna z cest převáží\footnote{Při vícenásobném opakování experimentu bylo nakonec využití obou mostů rovnoměrné.}.
+V případě rozdílných délek je vliv náhodných fluktuací značně redukován a většina mravenců nakonec volí
+tu nejkratší cestu.
+
+Feromonová stopa po čase mizí; tomuto procesu říkáme {\it vypařování}. Tímto mechanismem se
 mravenci dokáží velmi rychle a efektivně přizpůsobovat změnám podmínek - např. pokud zdroj
 potravy zmizel či pokud na cestě za potravou vznikla překážka.
+
+\begin{figure}[here]
+  \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{img/aco_a}
+      \caption{Všichni mravenci jsou v mraveništi. V prostředí není žádná feromonová stopa.}
+      \label{fig:aco_a}
+    \end{subfigure}\quad%   %add desired spacing between images (~,\quad,\qquad etc. (or a blank line)
+    \begin{subfigure}[t]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{img/aco_b}
+      \caption{Hledání potravy začíná. Asi polovina mravenců si s pravděpodobností vybere kratší cestu (kruhy), 
+               druhá polovina delší.}
+      \label{fig:aco_b}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{img/aco_c}
+      \caption{Mravenci, kteří si vybrali kratší cestu, dorazili k potravě dříve. Při návratu je pravděpodobnost,
+               že si vyberou znovu kratší cestu, díky feromonové stopě vyšší.}
+      \label{fig:aco_c}
+    \end{subfigure}\quad%
+    \begin{subfigure}[t]{0.45\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{img/aco_d}
+      \caption{Feromonová stopa na kratší cestě je více zesílena, čímž pravděpodobnost jejího budoucího výběru
+               roste. Nakonec, díky vypařování, pravděpodobnost výběru delší cesty značně klesá.}
+      \label{fig:aco_d}
+    \end{subfigure}
+  \caption{Experiment demonstrující výběr nejkratší cesty při hledání potravy u mravenců. Feromonová stopa je
+           znázorněna jako přerušovaná čára, jejíž tloušťka určuje sílu této stopy.}
+  \label{fig:aco}
+\end{figure}
 
 \paragraph{Mravenci: přesun kořisti.}
 Dalším ze známých jevů u mravenců je kooperativní transport. Pokud mravenci uloví kořist, která
@@ -205,8 +255,7 @@ většiny a informovaných vůdců.
 
 \section{Inteligence roje v optimalizaci}
 %Obecné kecy o optimalizaci...
-Inteligence roje má v optimalizaci jedno z nejdůležitějších využití
-\footnote{Pokud není uvedeno jinak, veškerý materiál k textu této kapitoly je čerpán z \cite{Blum08SwarmOpt}.}.
+Inteligence roje má v optimalizaci jedno z nejdůležitějších využití.
 Optimalizací rozumíme řešení
 nějakého {\it optimalizačního problému}, který se skládá z hledání optima (maxima či minima)
 nějaké účelové funkce. Mnoho teoretických úloh i úloh z reálného světa vede právě na řešení úlohy
@@ -225,7 +274,8 @@ je prohledávací prostor definovaný na konečné množině proměnných $X_i,i
 %přípustná množina, hypotézy?
  $\omega$ je množina omezujících podmínek nad těmito proměnnými a
 $f:S\rightarrow\mathbb{R}^{+}$ je účelová funkce, která přiřazuje ohodnocení (fitness) každému prvku % (neboli řešení)
-z $S$. Pokud mají proměnné diskrétní doménu (definiční obor), hovoříme o diskrétní
+z $S$\footnote{Pokud není uvedeno jinak, veškerý materiál k textu této kapitoly je čerpán z \cite{Blum08SwarmOpt}.}.
+Pokud mají proměnné diskrétní doménu (definiční obor), hovoříme o diskrétní
 (kombinatorické) optimalizaci, v opačném případě hovoříme o optimalizaci spojité (existuje i
 kombinovaná).
 
@@ -254,9 +304,12 @@ významně zkráceném čase (prohledávací prostor není obvykle prohledán ce
 Většinu metod inteligence roje lze zařadit mezi tzv. {\it metaheuristiky}, což je způsob optimalizace,
 kdy je snahou iterativně zlepšovat nějaké kandidátní řešení s ohledem na požadovanou kvalitu. Těmto
 metodám obvykle stačí velmi málo informací o řešeném problému a dokážou rychle prohledat velmi
-velký prostor kandidátních řešení. Mnoho metaheuristik implementuje nějakou formu stochastické
-optimalizace. Mezi metaheuristické metody patří například i evoluční algoritmy.
-%heuristiky vs metaheuristiky?
+velký prostor kandidátních řešení. Mnoho metaheuristik obvykle implementuje nějakou formu stochastické
+optimalizace. Metaheuristika obvykle označuje celou skupinu algoritmických konceptů,
+které definují heuristické metody aplikovatelné na širokou škálu různých problémů\footnote{Jinými slovy,
+metaheuristika je obecný algoritmický framework, který může být aplikovatelný na mnoho různých
+optimalizačních problémů s relativně malými modifikacemi.}.  Mezi tyto metody patří například i
+evoluční algoritmy \cite{Dorigo06antcolony}.
 %TODO jeste neco o spojite?
 
 %Aproximační metody můžeme rozdělit na {\it lokální prohledávání} (iterativní zlepšování počátečního
@@ -267,10 +320,11 @@ optimalizace. Mezi metaheuristické metody patří například i evoluční algo
 
 
 \subsubsection{Přínos inteligence roje v optimalizaci}
-
-Významným přínosem technik inteligence roje je oproti jiným metodám obvykle velká rychlost, nízká
-výpočetní náročnost a schopnost poskytnout alespoň přibližné řešení tam, kde nám často ani není známo,
-zda existuje nějaký exaktní postup, jak řešení najít. %TODO rozvest, overit a upravit
+Významným přínosem technik inteligence roje je obvykle rychlost, nízká
+výpočetní náročnost, relativní jednoduchost implementace a aplikovatelnost na širokou škálu problémů.
+Tyto metody také obvykle nalézají velmi dobrá řešení daných optimalizačních problémů.
+% a schopnost poskytnout alespoň přibližné řešení tam, kde nám často ani není známo, zda existuje nějaký exaktní postup, jak řešení najít.
+%TODO rozvest, overit a upravit?
 
 %\medskip
 
@@ -280,20 +334,43 @@ kolonií ({\it ant colony optimization}) a optimalizace hejnem částic ({\it pa
 
 \subsection{Optimalizace mravenčí kolonií (ACO)}
 %Pro algoritmy typu ACO bude vhodné využít \cite{Dorigo06antcolony}.
-Optimalizace mravenčí kolonií byla jedna z prvních technik aproximační optimalizace inspirovaná
-inteligencí roje (konkrétně hledáním potravy u mravenců, viz kap. \ref{sub:biolzakl}).
+Optimalizace mravenčí kolonií byla jedna z prvních technik hledání přibližných řešení kombinatorických
+problémů inspirovaná inteligencí roje (konkrétně hledáním potravy u mravenců, viz kap. \ref{sub:biolzakl}).
+Hlavním rysem je hledání nejkratší cesty za pomocí nepřímé výměny informací přes okolí (stigmergie, viz def. \ref{def:stig}) pomocí feromonů.
 
 \subsubsection{Princip}
-\dots
+Pro implementaci algoritmů ASO je prvním krokem nejprve diskretizovat a zjednodušit model chování reálných
+mravenců, který byl uveden v kapitole \ref{sub:biolzakl} a zejména na obrázku \ref{fig:aco}.
+
+...
+
+
+
+
+\begin{algorithm}[here]
+  \DontPrintSemicolon
+  \SetAlgoNoLine
+  Set parameters, initialize pheromone trails\;
+  \While{\textnormal{termination condition not met}}{
+    {\it ConstructAntSolutions}\;
+    {\it ApplyLocalSearch} (optional)\;
+    {\it UpdatePheromones}\;
+  }  
+\caption{The Ant Colony Optimization Metaheuristic\label{alg:aco}}
+\end{algorithm}
 
 \subsubsection{Aplikace na TSP}
-Mnoho aplikací ACO algoritmů je nejčastěji na NP-těžké problémy. Jako příklad si ukážeme konkrétní
-aplikaci na problém obchodního cestujícího.
+Mnoho aplikací ACO algoritmů je nejčastěji na NP-těžké problémy. Jedna z prvních aplikací byla na problém
+obchodního cestujícího, na němž si ukážeme princip průběhu algoritmu.
 
 \subsubsection{Algoritmy}
-\paragraph{Ant System (AS)} {}
-\paragraph{Ant Colony System(ACS)} {}
-%\paragraph{MAX - MIN Ant System (MMAS)} {}
+Do kategorie ACO, jakožto metaheuristiky, spadá mnoho různých algoritmů, které se většinou liší hlavně způsobem aktualizace feromonové stopy. Zde je probrán nejprve původní algoritmus a poté dvě další, nejúspěšnější varianty.
+Obsáhlejší seznam dalších algoritmů lze nalézt například v \cite{Dorigo06antcolony}.
+
+\paragraph{Ant System (AS)} {(důkaz konvergence u TSP)}
+\paragraph{$\mathcal{MAX-MIN}$ Ant System ($\mathcal{MM}$AS)} {...}
+\paragraph{Ant Colony System(ACS)} {...}
+
 
 \subsubsection{Další využití}
 Z dalších klasických NP-těžkých optimalizačních problému můžeme jmenovat vytváření rozvrhů,
@@ -312,8 +389,8 @@ Avšak tyto přístupy se od původní metody konceptuálně velmi liší.
 \subsection{Optimalizace hejnem částic (PSO)}
 %Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
 Optimalizace hejnem částic je populačně založená stochastická optimalizační metoda inspirovaná
-shlukováním zvířat či hmyzu (například hejna ptáků, ryb, apod.)
-\footnote{Pokud není uvedeno jinak, veškerý materiál k textu této kapitoly je čerpán z \cite{Blum08SwarmOpt}.}.
+shlukováním zvířat či hmyzu (například hejna ptáků, ryb, apod.)\footnote{Pokud není uvedeno jinak,
+veškerý materiál k textu této kapitoly je čerpán z \cite{Blum08SwarmOpt}.}.
 Poprvé byla představena roku 1995 jako metoda pro spojitou optimalizaci a od té doby
 její popularita rostla hlavně díky schopnosti robustního a efektivního řešení složitých optimalizačních problémů.
 Mezi její hlavní výhody patří rychlá konvergence k optimu pro širokou škálu účelových funkcí a snadná implementace.
@@ -400,7 +477,13 @@ diskrétní či kombinované optimalizace, adaptivní verze algoritmů, víceú�
 
 
 \subsubsection{Využití}
-Optimalizace algoritmy PSO má široké využití -- od klasických problémů, jako je plánování, TSP,
+Jednou z prvních aplikací metod PSO byl vývoj metod učení neuronových sítí. PSO bylo využito jako náhrada
+tradičního {\it back-propagation} algoritmu pro učení vícevrstvého perceptronu. Díky rychlé konvergenci může
+užití PSO v trénování neuronových sítí ušetřit značný výpočetní čas ve srovnání s jinými
+optimalizačními metodami.
+
+Dále má optimalizace algoritmy PSO a jejich modifikacemi široké využití -- od klasických problémů,
+jako je plánování, TSP,
 trénování neuronových sítí či problémy přiřazení ({\it assignment problems}), až po vysoce
 specializované aplikace, jako je {\it reactive power and voltage
 control}\footnote{\url{http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=00898095}},
@@ -409,20 +492,10 @@ control}\footnote{\url{http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=00898
 a dynamické optimalizaci.
 %TODO metody cesky (jak prelozit?), jeste metody upravit (zobecnit apod)
 
-Jednou z prvních aplikací metod PSO byl vývoj metod učení neuronových sítí. PSO bylo využito jako náhrada
-tradičního {\it back-propagation} algoritmu pro učení vícevrstvého perceptronu. Díky rychlé konvergenci může
-užití PSO v trénování neuronových sítí ušetřit značný výpočetní čas ve srovnání s jinými
-optimalizačními metodami.
-
-
-%\subsection{Stochastic diffusion search (SDS)}
-%\url{http://en.wikipedia.org/wiki/Stochastic_diffusion_search}
-%Další zdroje?
-
 \subsection{Další metody}
-Následuje seznam některých dalších metod optimalizace inteligencí roje se stručným popisem. Seznam nelze brát
-jako úplný, jelikož se toto, relativně mladé, odvětví stále vyvíjí a neustále vzniká mnoho modifikací
-původních algoritmů, hybridní metody či přístupy zcela nové.
+Následuje výběr některých dalších metod optimalizace inteligencí roje se stručným popisem. Toto relativně mladé
+odvětví se ale stále vyvíjí, takže neustále vzniká mnoho modifikací původních algoritmů, hybridní metody či
+přístupy zcela nové.
 
 \begin{description} %TODO jine formatovani? - subsubsection?, paragraph?
 
