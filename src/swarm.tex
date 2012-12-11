@@ -122,7 +122,7 @@ feromonové stopy, které pak mají tendenci s větší pravděpodobností\footn
 cesty, kde je feromonová stopa slabší -- zajistí průzkum prostředí.} následovat. Roku 1990 zkoumal
 Deneubourg a kol. toto
 chování\footnote{Konkrétně u druhu {\it Linepithema humile}.} pomocí experimentů -- mravenci byli od potravy
-odděleni dvěma mosty \cite{Dorigo06antcolony}. Obrázek \ref{alg:aco} (převzato z \cite{Blum08SwarmOpt})
+odděleni dvěma mosty \cite{Dorigo06antcolony}. Obrázek \ref{fig:aco} (převzato z \cite{Blum08SwarmOpt})
 popisuje chování mravenců zjištěné v experimentu při rozdílné
 délce těchto mostů. Při stejné délce volí mravenci cesty náhodně, ale díky náhodným fluktuacím po čase
 jedna z cest převáží\footnote{Při vícenásobném opakování experimentu bylo nakonec využití obou mostů rovnoměrné.}.
@@ -557,9 +557,9 @@ optimalizačními metodami.
 
 Dále má optimalizace algoritmy PSO a jejich modifikacemi široké využití -- od klasických problémů,
 jako je plánování, TSP,
-trénování neuronových sítí či problémy přiřazení ({\it assignment problems}), až po vysoce
-specializované aplikace, jako je {\it reactive power and voltage
-control}\footnote{\url{http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=00898095}},
+trénování neuronových sítí či problémy optimálního přiřazení ({\it assignment problems}), až po vysoce
+specializované aplikace, jako je regulace napětí a jalového výkonu ({\it reactive power and voltage
+control}\footnote{\url{http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=00898095}}),
 {\it biomedical image registration}\footnote{\url{http://pdf.aminer.org/001/098/431/an_approach_to_multimodal_biomedical_image_registration_utilizing_particle_swarm.pdf}},
 či například i komponování hudby. V posledních letech byly metody PSO (jejich varianty) oblíbené také ve víceúčelové
 a dynamické optimalizaci. Mnoho dalších aplikací s odkazy na zdroje lze nalézt v \cite{Blum08SwarmOpt}.
@@ -570,27 +570,29 @@ Následuje výběr některých dalších metod optimalizace inteligencí roje se
 odvětví se ale stále vyvíjí, takže neustále vzniká mnoho modifikací původních algoritmů, hybridní metody či
 přístupy zcela nové.
 
-\begin{description} %TODO jine formatovani? - subsubsection?, paragraph?
+%\begin{description}
 
-\item[Optimalizace včelím rojem (BCO)] zahrnuje celou skupinu algoritmů, které se inspirují chováním včel.
+\paragraph{Optimalizace včelím rojem (BCO)} {zahrnuje celou skupinu algoritmů, které se inspirují
+ chováním včel. Na rozdíl od ACO, zde hraje zásadní roli přímá výměna informace mezi
+ jednotlivými včelami. 
 Zásadní roli zde hraje přímá výměna informace mezi jednotlivými včelami na rozdíl od užití feromonu mravenčí
 kolonií. Obvykle je roj rozdělen na specializované skupiny: královny, průzkumné včely vyhledávající nové zdroje
-potravy, včely následující úspěšné průzkumné včely a podobně. ({\bf z wiki - upravit?})
+potravy, včely následující úspěšné průzkumné včely a podobně.} ({\bf z wiki - upravit?})
 
-\item[Optimalizace hejnem světlušek (GSO)] je metoda, ve které její autoři vybavují  každého člena hejna
+\paragraph{Optimalizace hejnem světlušek (GSO)} {je metoda, ve které její autoři vybavují  každého člena hejna
 virtuální svítivou látkou (luciferin) v závislosti na jeho úspěšnosti při procházení prohledávacím prostorem.
 Čím úspěšnější, tím více září a přitahuje ke své pozici ostatní světlušky. U každé světlušky se zároveň
 předpokládá omezená vzdálenost, kam až dohlédne. Tato vzdálenost se i dynamicky vyvíjí a algoritmus dosahuje
-zajímavých výsledků při multimodální optimalizaci. ({\bf z wiki - upravit?})
+zajímavých výsledků při multimodální optimalizaci.} ({\bf z wiki - upravit?})
 
-\item[Stochastic diffusion search (SDS)] je metoda, která oproti ACO využívá přímou ({\it one-to-one}) komunikaci
-mezi agenty (inspirovanou jiným druhem mravenců). {\it Agents perform cheap, partial evaluations of a hypothesis (a candidate solution to the search problem). They then share information about hypotheses (diffusion of information) through direct one-to-one communication. As a result of the diffusion mechanism, high-quality solutions can be identified from clusters of agents with the same hypothesis. The operation of SDS is most easily understood by means of a simple analogy – The Restaurant Game. \footnote{\url{http://www.doc.gold.ac.uk/~mas02mb/sdp/index.htm}}}
+\paragraph{Stochastic diffusion search (SDS)} {je metoda, která oproti ACO využívá přímou ({\it one-to-one}) komunikaci
+mezi agenty (inspirovanou jiným druhem mravenců). {\it Agents perform cheap, partial evaluations of a hypothesis (a candidate solution to the search problem). They then share information about hypotheses (diffusion of information) through direct one-to-one communication. As a result of the diffusion mechanism, high-quality solutions can be identified from clusters of agents with the same hypothesis. The operation of SDS is most easily understood by means of a simple analogy – The Restaurant Game. \footnote{\url{http://www.doc.gold.ac.uk/~mas02mb/sdp/index.htm}}}}
 % http://www.doc.gold.ac.uk/~mas02mb/sdp/index.htm
 % ({\bf z wiki - prelozit, upravit, popis té hry?})
 
 %http://en.wikipedia.org/wiki/Swarm_intelligence
 
-\end{description}
+%\end{description}
 
 
 \subsection{Otázky}
