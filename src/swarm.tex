@@ -118,10 +118,12 @@ zaměření tohoto učebního textu.
 
 Při vyhledávání potravy mají mravenci schopnost najít nejkratší cestu od zdroje potravy k mraveništi,
 a to díky využití stigmergického přístupu ke komunikaci\,--\,zanechávají v prostředí
-feromonové stopy, které pak mají tendenci s větší pravděpodobností následovat. Roku 1990 zkoumal
+feromonové stopy, které pak mají tendenci s větší pravděpodobností\footnote{Mravenci si tedy můžou vybírat i
+cesty, kde je feromonová stopa slabší -- zajistí průzkum prostředí.} následovat. Roku 1990 zkoumal
 Deneubourg a kol. toto
 chování\footnote{Konkrétně u druhu {\it Linepithema humile}.} pomocí experimentů -- mravenci byli od potravy
-odděleni dvěma mosty. Obrázek \ref{alg:aco} popisuje chování mravenců zjištěné v experimentu při rozdílné
+odděleni dvěma mosty \cite{Dorigo06antcolony}. Obrázek \ref{alg:aco} (převzato z \cite{Blum08SwarmOpt})
+popisuje chování mravenců zjištěné v experimentu při rozdílné
 délce těchto mostů. Při stejné délce volí mravenci cesty náhodně, ale díky náhodným fluktuacím po čase
 jedna z cest převáží\footnote{Při vícenásobném opakování experimentu bylo nakonec využití obou mostů rovnoměrné.}.
 V případě rozdílných délek je vliv náhodných fluktuací značně redukován a většina mravenců nakonec volí
@@ -254,7 +256,6 @@ většiny a informovaných vůdců.
 % -----------------------------------------------------------------------------
 
 \section{Inteligence roje v optimalizaci}
-%Obecné kecy o optimalizaci...
 Inteligence roje má v optimalizaci jedno z nejdůležitějších využití.
 Optimalizací rozumíme řešení
 nějakého {\it optimalizačního problému}, který se skládá z hledání optima (maxima či minima)
@@ -264,11 +265,9 @@ vytváření rozvrhů ({\it timetabling}), optimalizaci tvarů ({\it shape optim
 telekomunikačních sítí či problémy z výpočetní biologie ({\it computational biology}). Mnoho
 těchto problému bylo zobecněno na nějaký známý, {\it NP-těžký} problém, jako je například {\it problém
 obchodního cestujícího} (TSP), což je jeden z nejznámějších {\it NP-těžkých} problémů kombinatorické
-optimalizace.
+optimalizace. %TODO to vyuziti obecneji?
 
-%\medskip
 \subsection{Úvod}
-
 Obecně můžeme optimalizační problém $\mathcal{P}$ definovat jako trojici $(S,\omega,f)$, kde $S$
 je prohledávací prostor definovaný na konečné množině proměnných $X_i,i=1,\dots,n$ (kandidátní řešení),
 %přípustná množina, hypotézy?
@@ -282,14 +281,13 @@ kombinovaná).
 Cílem optimalizace je najít řešení $s\in S$ optimalizačního problému $\mathcal{P}$ takové, že
 $f(s)\leq f(s^{\prime}),\forall s^{\prime}\in S$ (v případě, že chceme účelovou funkci
 minimalizovat), či $f(s)\geq f(s^{\prime}),\forall s^{\prime}\in S$ (v případě, že ji chceme
-maximalizovat). V reálných problémech se často můžeme setkat s optimalizací několika účelových
+maximalizovat\footnote{Maximalizace funkce $f$ je ekvivalentní minimalizaci funkce $-f$.}).
+V reálných problémech se často můžeme setkat s optimalizací několika účelových
 funkcí zároveň ({\it víceúčelová optimalizace}), hledání více než jednoho optima účelové funkce
 ({\it multimodální optimalizace}), či optimalizací {\it dynamickou} (schopnost adaptace na změnu
 optima v čase). %stochastická, pravdepodobnostni?
 
 \subsubsection{Metody optimalizace}
-%\medskip
-
 Vzhledem k praktické důležitosti optimalizačních problémů bylo na jejich řešení vyvinuto mnoho
 algoritmů. V kontextu kombinatorické optimalizace můžeme tyto algoritmy klasifikovat na úplné a
 aproximační. Úplné algoritmy zaručeně najdou pro každý, konečně velký, kombinatorický problém
@@ -301,16 +299,15 @@ lze zařadit i algoritmy inspirované inteligencí roje. Sice u nich nemáme jis
 optimálního řešení, na druhou stranu ale nalezneme řešení alespoň blízké optimálnímu, a to ve
 významně zkráceném čase (prohledávací prostor není obvykle prohledán celý).
 
-Většinu metod inteligence roje lze zařadit mezi tzv. {\it metaheuristiky}, což je způsob optimalizace,
-kdy je snahou iterativně zlepšovat nějaké kandidátní řešení s ohledem na požadovanou kvalitu. Těmto
+Většinu metod inteligence roje lze zařadit mezi tzv. {\it metaheuristiky}, které označují celou skupinu
+algoritmických konceptů, které definují heuristické metody aplikovatelné na širokou škálu různých problémů\footnote{Jinými slovy, metaheuristika je obecný algoritmický framework, který může být aplikovatelný
+na mnoho různých optimalizačních problémů s relativně malými modifikacemi.}.
+Mezi tyto metody patří například i evoluční algoritmy \cite{Dorigo06antcolony}. Při optimalizaci je obvykle
+snahou iterativně zlepšovat nějaké kandidátní řešení s ohledem na požadovanou kvalitu. Těmto
 metodám obvykle stačí velmi málo informací o řešeném problému a dokážou rychle prohledat velmi
 velký prostor kandidátních řešení. Mnoho metaheuristik obvykle implementuje nějakou formu stochastické
-optimalizace. Metaheuristika obvykle označuje celou skupinu algoritmických konceptů,
-které definují heuristické metody aplikovatelné na širokou škálu různých problémů\footnote{Jinými slovy,
-metaheuristika je obecný algoritmický framework, který může být aplikovatelný na mnoho různých
-optimalizačních problémů s relativně malými modifikacemi.}.  Mezi tyto metody patří například i
-evoluční algoritmy \cite{Dorigo06antcolony}.
-%TODO jeste neco o spojite?
+optimalizace.
+% jeste neco o spojite?
 
 %Aproximační metody můžeme rozdělit na {\it lokální prohledávání} (iterativní zlepšování počátečního
 %řešení až do uváznutí v lokálním extrému) a {\it konstruktivní algoritmy} (budování řešení s využitím
@@ -318,73 +315,80 @@ evoluční algoritmy \cite{Dorigo06antcolony}.
 %schopnost využití zkušeností získaných v průběhu řešení daného problému (tzv. {\it metaheuristiky}).
 %Zde můžeme zařadit například i evoluční algoritmy.
 
-
 \subsubsection{Přínos inteligence roje v optimalizaci}
 Významným přínosem technik inteligence roje je obvykle rychlost, nízká
 výpočetní náročnost, relativní jednoduchost implementace a aplikovatelnost na širokou škálu problémů.
 Tyto metody také obvykle nalézají velmi dobrá řešení daných optimalizačních problémů.
 % a schopnost poskytnout alespoň přibližné řešení tam, kde nám často ani není známo, zda existuje nějaký exaktní postup, jak řešení najít.
-%TODO rozvest, overit a upravit?
-
-%\medskip
 
 Dvě nejvýznamnější techniky pro získání přibližných řešení v rozumném čase jsou optimalizace mravenčí
 kolonií ({\it ant colony optimization}) a optimalizace hejnem částic ({\it particle swarm optimization}).
-
 
 \subsection{Optimalizace mravenčí kolonií (ACO)}
 %Pro algoritmy typu ACO bude vhodné využít \cite{Dorigo06antcolony}.
 Optimalizace mravenčí kolonií byla jedna z prvních technik hledání přibližných řešení kombinatorických
 problémů inspirovaná inteligencí roje (konkrétně hledáním potravy u mravenců, viz kap. \ref{sub:biolzakl}).
-Hlavním rysem je hledání nejkratší cesty za pomocí nepřímé výměny informací přes okolí (stigmergie, viz def. \ref{def:stig}) pomocí feromonů.
+Hlavním rysem je hledání nejkratší cesty v grafu pomocí množiny agentů (mravenců), a to za pomocí nepřímé výměny
+informací přes okolí (stigmergie, viz def. \ref{def:stig}). Tyto techniky se začali rozšiřovat počátkem devadesátých let dvacátého století.
 
 \subsubsection{Princip}
-Pro implementaci algoritmů ASO je prvním krokem nejprve diskretizovat a zjednodušit model chování reálných
-mravenců, který byl uveden v kapitole \ref{sub:biolzakl} a zejména na obrázku \ref{fig:aco}.
+Základní princip bude ukázán na prvním algoritmu, který byl v rámci ACO uveden -- {\it Ant System} (AS), a také
+na prvním problému, k jehož řešení byl použit -- problém obchodního cestujícího (TSP). Algoritmus vychází z modelu
+chování reálných mravenců, který byl uveden v kapitole \ref{sub:biolzakl} a zejména na obrázku \ref{fig:aco}.
+%Rozdíl oproti reálným mravencům...
+
+
+
+%Pro implementaci algoritmů ASO je prvním krokem nejprve diskretizovat a zjednodušit model chování reálných
+%mravenců, který byl uveden v kapitole \ref{sub:biolzakl} a zejména na obrázku \ref{fig:aco}.
 
 ...
 
-
+\subsubsection{Popis metaheuristiky}
+Metaheuristika 
 
 
 \begin{algorithm}[here]
   \DontPrintSemicolon
   \SetAlgoNoLine
-  Set parameters, initialize pheromone trails\;
-  \While{\textnormal{termination condition not met}}{
-    {\it ConstructAntSolutions}\;
-    {\it ApplyLocalSearch} (optional)\;
-    {\it UpdatePheromones}\;
+  Nastav parametry, inicializuj feromonové stopy\;  
+  \While{\textnormal{není splněna ukončující podmínka}}{
+    {\it Konstruuj řešení}\;
+    {\it Aplikuj lokální prohledávání} (volitelné)\;
+    {\it Aktualizuj feromonové stopy}\;
   }  
-\caption{The Ant Colony Optimization Metaheuristic\label{alg:aco}}
+\caption{Metaheuristika optimalizace mravenčí kolonií\label{alg:aco}}
 \end{algorithm}
 
-\subsubsection{Aplikace na TSP}
-Mnoho aplikací ACO algoritmů je nejčastěji na NP-těžké problémy. Jedna z prvních aplikací byla na problém
-obchodního cestujícího, na němž si ukážeme princip průběhu algoritmu.
+%\subsubsection{Aplikace na TSP}
 
-\subsubsection{Algoritmy}
-Do kategorie ACO, jakožto metaheuristiky, spadá mnoho různých algoritmů, které se většinou liší hlavně způsobem aktualizace feromonové stopy. Zde je probrán nejprve původní algoritmus a poté dvě další, nejúspěšnější varianty.
-Obsáhlejší seznam dalších algoritmů lze nalézt například v \cite{Dorigo06antcolony}.
+%Mnoho aplikací ACO algoritmů je nejčastěji na NP-těžké problémy. Jedna z prvních aplikací byla na problém
+%obchodního cestujícího, na němž si ukážeme princip průběhu algoritmu.
 
-\paragraph{Ant System (AS)} {(důkaz konvergence u TSP)}
+
+\subsubsection{Další algoritmy}
+Do kategorie ACO, jakožto metaheuristiky, spadá mnoho různých algoritmů, které se většinou liší hlavně způsobem aktualizace feromonové stopy. Zde jsou uvedeny dvě nejúspěšnější varianty. Obsáhlejší seznam dalších algoritmů
+lze nalézt například v \cite{Dorigo06antcolony}.
+
+%\paragraph{Ant System (AS)} {(důkaz konvergence u TSP)}
 \paragraph{$\mathcal{MAX-MIN}$ Ant System ($\mathcal{MM}$AS)} {...}
 \paragraph{Ant Colony System(ACS)} {...}
 
 
-\subsubsection{Další využití}
-Z dalších klasických NP-těžkých optimalizačních problému můžeme jmenovat vytváření rozvrhů,
+\subsubsection{Využití}
+Z klasických NP-těžkých optimalizačních problému můžeme kromě TSP jmenovat vytváření rozvrhů,
 barvení grafů, problém maximální kliky v grafu či problém směrování vozidel ({\it vehicle routing problem}).
 Praktické aplikace obsahují například
 umisťování součástek v návrhu obvodů, směrování v komunikačních sítích a jejich návrh, či různé problémy
 z bioinformatiky.
-Výzkum se dále zaměřuje na použití ACO ve víceúčelové, dynamické a stochastické optimalizaci.
+Výhodou oproti jiným metodám, jako je například {\it simulované žíhání} či {\it genetické algoritmy}, je
+schopnost dynamické optimalizace -- graf se mění v čase a algoritmy ACO se na tyto změny dokáží v reálném
+čase adaptovat.
 
 Algoritmy ACO sloužily původně k řešení diskrétních optimalizačních problémů. Čím dál větší pozornost je
 ale věnována jejich adaptaci i na spojité optimalizační problémy (například {\it Continous ACO}).
 Avšak tyto přístupy se od původní metody konceptuálně velmi liší.
 
-%TODO Srovnání s genetickými algoritmy? (fitness? - i u PSO?)
 
 \subsection{Optimalizace hejnem částic (PSO)}
 %Tady se bude brát hlavně z \cite{Blum08SwarmOpt}.
@@ -428,7 +432,7 @@ Průběh základní verze PSO ukazuje algoritmus \ref{alg:pso}\footnote{Ohodnoce
 kandidátního řešení účelové funkci.}.
 Na obrázku \ref{fig:psovec} lze vidět vizualizaci jednotlivých částí rovnice \ref{eqn:pso1} ve formě
 vektorů a následnou aktualizovanou pozici $x_i$. Váha $\omega$, kterou je upravována hodnota $v_i$, je
-probrána v následující části.
+zmíněna v následující části.
 
 \begin{algorithm}[here]
   \DontPrintSemicolon
@@ -515,7 +519,7 @@ mezi agenty (inspirovanou jiným druhem mravenců). {\it Agents perform cheap, p
 % http://www.doc.gold.ac.uk/~mas02mb/sdp/index.htm
 % ({\bf z wiki - prelozit, upravit, popis té hry?})
 
-%\item[(Vybrat ještě něco?] \url{http://en.wikipedia.org/wiki/Swarm_intelligence})
+%http://en.wikipedia.org/wiki/Swarm_intelligence
 
 \end{description}
 
