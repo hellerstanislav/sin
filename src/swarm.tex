@@ -337,36 +337,93 @@ Základní princip bude ukázán na prvním algoritmu, který byl v rámci ACO u
 na prvním problému, k jehož řešení byl použit -- problém obchodního cestujícího (TSP).
 
 Algoritmus vychází z modelu chování reálných mravenců, který byl uveden v kapitole \ref{sub:biolzakl} a zejména
-na obrázku \ref{fig:aco}. Oproti reálným mravencům je ale zavedeno několik modifikací:
+na obrázku \ref{fig:aco}. Oproti reálným mravencům je obecně zavedeno několik modifikací:
 \begin{itemize}
-  \item diskretizace světa -- reprezentace většinou grafem; mravenci se pohybují synchronně v iteracích,
-  \item mravenci mají paměť -- vnitřní stavy,
-  \item umělí mravenci nejsou zcela slepí -- můžou se rozhodovat na základě dalších kritérií,
-  \item umělí mravenci zanechávají feromon jen při cestě zpátky do hnízda, množství zanechaného feromonu bývá
-        funkcí kvality nalezeného řešení; 
-  \item některá vnější vylepšení -- lokální optimalizace, backtracking.
+  \item diskretizace světa -- reprezentace grafem, %; mravenci se pohybují v iteracích,
+  \item mravenci mají paměť -- seznam již navštívených míst,
+  \item umělí mravenci nejsou zcela slepí -- můžou se rozhodovat na základě dalších kritérií, %, např. výběr kratší cesty
+  \item umělí mravenci zanechávají feromon jen při cestě zpátky do hnízda; množství zanechaného feromonu může
+        být funkcí kvality nalezeného řešení, 
+  \item některá volitelná vylepšení z globální perspektivy (nad úrovní mravence) -- např. dodatečná lokální optimalizace.
 \end{itemize}
 
+V algoritmu AS se předpokládá, že řešení problému je rozdělitelné do jednotlivých komponent, s kterými jsou
+asociovány feromonové stopy. Obecně se očekává, že těchto komponent bude konečný a rozumně omezený počet.
 
+V problému obchodního cestujícího máme plně propojený obyčejný graf s váhami hran. Vrcholy grafu reprezentují
+města, váhy hran reprezentují vzdálenosti mezi městy. Cílem je v grafu najít Hamiltonovskou kružnici
+minimální délky. Prohledávací prostor se tedy skládá ze všech Hamilt. kružnic v grafu.
+Účelová funkce přiřazuje každé Hamilt. kružnici v prohledávacím prostoru součet vah všech jejich hran.
+
+\medskip
+
+V přístupu AS k řešení TSP mohou být tedy komponentami řešení hrany grafu, tzn., že každé hraně bude přiřazena
+feromonová stopa. Cílem každého mravence je konstrukce platného řešení, resp. platné Hamiltonovské kružnice.
+Úkol mravence se vlastně mění z \textquotedblleft{\it hledej cestu z mraveniště k potravě}" na
+ \textquotedblleft{\it konstruuj platné řešení optimalizačního problému}".
+
+Každý mravence konstruuje řešení následovně. Nejprve náhodně vybere jeden vrchol grafu jako startovní.
+Poté vytváří H. kružnici v každém konstrukčním kroku pohybem z jeho aktuálního vrcholu (tzn. města)
+do jiného, který ještě nenavštívil. V každém takovém kroku ...
+
+
+%Each of artificial ants builds a solution by walking from vertex to vertex on the graph with the constraint of not visiting any vertex that he has already visited in his walk. At each step of the solution construction, an ant selects the following vertex to be visited according to a stochastic mechanism that is biased by the pheromone: when in vertex i, the following vertex is selected stochastically among the previously unvisited ones. In particular, if j has not been previously visited, it can be selected with a probability that is proportional to the pheromone associated with edge (i, j).
+
+
+%Při řešení problému obchodního cestujícího máme množinu měst a známe vzdálenosti mezi každým z nich. Cílem
+%je najít nejkratší cestu mezi těmito městy při navštívení každého města pouze jednou. Formálně, cílem
+%je najít Hamiltonovskou kružnici minimální délky v plně propojeném grafu. V rámci ACO je problém řešen
+%simulací určitého poštu umělých mravenců, kteří se pohybují grafem. Každý vrchol grafu reprezentuje město,
+%každá hrana propojení mezi dvěma městy. Proměnná feromonu je asociována s každou hranou grafu a může být mravenci
+%čtena a upravována.
+
+%AS předpokládá, že řešení je rozdělitelné do jednotlivých komponent, kterých je konečný a rozumně omezený počet.
+%Zde jsou komponentami hrany grafu. Účelová funkce je součet vah hran na kružnici. Úlohou každého mravence
+%je konstrukce platného řešení, tedy platné kružnice v grafu.
 
 
 \subsubsection{Popis metaheuristiky}
-Metaheuristika 
+Později byla optimalizace mravenčí kolonií formalizována jako celá metaheuristika ({\it ACO framework}) pro řešení různých kombinatorických
+optimalizačních problémů. Obecně může být použita pro řešení jakéhokoli optimalizačního problému, pro který lze
+použít nějakou konstruktivní heuristickou funkci. Základem je nalezení vhodné grafové reprezentace problému.
+
+Obecný průběh aplikace metaheuristiky na obecný kombinatorický problém zachycuje obrázek \ref{fig:acofw}.
+...
+
+%První algoritmus, který byl v rámci ACO uveden, byl {\it Ant System} (AS), a to zejména pro řešení problému
+%obchodního cestujícího (TSP). Později byla optimalizace mravenčí kolonií formalizována jako celá metaheuristika
+%pro řešení různých kombinatorických problémů. Obecně může být použita pro řešení jakéhokoli optimalizačního
+%problému, pro který lze použít nějakou konstruktivní heuristickou funkci.
+
+%Mravenci fungují jako stochastické konstruktivní procedury, které vytvářejí řešení iterativním přidáváním
+%komponent do částečného řešení, přičemž při výběru každé další komponenty uvažují heuristickou informaci
+%o řešeném problému, která směřuje výpočet k slibným řešením, a také zkušenosti získané všemi mravenci od
+%začátku výpočtu, reprezentované feromonovými stopami, které se během výpočtu neustále adaptují.
+%Stochastická složka umožňuje vygenerování velkého počtu různých řešení.
 
 
-\begin{algorithm}[here]
-  \DontPrintSemicolon
-  \SetAlgoNoLine
-  Nastav parametry, inicializuj feromonové stopy\;  
-  \While{\textnormal{není splněna ukončující podmínka}}{
-    {\it Konstruuj řešení}\;
-    {\it Aplikuj lokální prohledávání} (volitelné)\;
-    {\it Aktualizuj feromonové stopy}\;
-  }  
-\caption{Metaheuristika optimalizace mravenčí kolonií\label{alg:aco}}
-\end{algorithm}
+
+\begin{figure}[here]
+  \centering
+  \includegraphics[width=14cm]{./img/aco_framework.png}
+  \caption{ACO metaheuristika (framework).}
+  \label{fig:acofw}
+\end{figure}
+
+%\begin{algorithm}[here]
+%  \DontPrintSemicolon
+%  \SetAlgoNoLine
+%  Nastav parametry, inicializuj feromonové stopy\;  
+%  \While{\textnormal{není splněna ukončující podmínka}}{
+%    {\it Konstruuj řešení}\;
+%    {\it Aplikuj lokální prohledávání} (volitelné)\;
+%    {\it Aktualizuj feromonové stopy}\;
+%  }  
+%\caption{Metaheuristika optimalizace mravenčí kolonií\label{alg:aco}}
+%\end{algorithm}
 
 %\subsubsection{Aplikace na TSP}
+
 
 %Mnoho aplikací ACO algoritmů je nejčastěji na NP-těžké problémy. Jedna z prvních aplikací byla na problém
 %obchodního cestujícího, na němž si ukážeme princip průběhu algoritmu.
@@ -376,7 +433,8 @@ Metaheuristika
 Do kategorie ACO, jakožto metaheuristiky, spadá mnoho různých algoritmů, které mají podobný základ. Většinou se
 liší hlavně způsobem aktualizace feromonové stopy, čímž přináší různá vylepšení. Jako příklad můžeme uvést
 varianty {\it $\mathcal{MAX-MIN}$ Ant System} ($\mathcal{MM}$AS), {\it Ant Colony System} (ACS) či
-{\it Rank-based AS} (RAS). Obsáhlejší seznam dalších algoritmů, s podrobnějším popisem prvních dvou zmiňovaných
+{\it Rank-based AS} (RAS). Díky tomu původní verze algoritmu AS už nemá skoro využití, jelikož tyto modifikace
+dávají lepší výsledky. Obsáhlejší seznam dalších algoritmů, s podrobnějším popisem prvních dvou zmiňovaných
 a odkazy na literaturu, lze nalézt například v \cite{Dorigo06antcolony}.
 
 
