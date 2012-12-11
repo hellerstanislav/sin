@@ -321,7 +321,7 @@ výpočetní náročnost, relativní jednoduchost implementace a aplikovatelnost
 Tyto metody také obvykle nalézají velmi dobrá řešení daných optimalizačních problémů.
 % a schopnost poskytnout alespoň přibližné řešení tam, kde nám často ani není známo, zda existuje nějaký exaktní postup, jak řešení najít.
 
-Dvě nejvýznamnější techniky pro získání přibližných řešení v rozumném čase jsou optimalizace mravenčí
+Dvě nejvýznamnější techniky optimalizace inteligencí roje jsou optimalizace mravenčí
 kolonií ({\it ant colony optimization}) a optimalizace hejnem částic ({\it particle swarm optimization}).
 
 \subsection{Optimalizace mravenčí kolonií (ACO)}
@@ -329,20 +329,26 @@ kolonií ({\it ant colony optimization}) a optimalizace hejnem částic ({\it pa
 Optimalizace mravenčí kolonií byla jedna z prvních technik hledání přibližných řešení kombinatorických
 problémů inspirovaná inteligencí roje (konkrétně hledáním potravy u mravenců, viz kap. \ref{sub:biolzakl}).
 Hlavním rysem je hledání nejkratší cesty v grafu pomocí množiny agentů (mravenců), a to za pomocí nepřímé výměny
-informací přes okolí (stigmergie, viz def. \ref{def:stig}). Tyto techniky se začali rozšiřovat počátkem devadesátých let dvacátého století.
+informací přes okolí (stigmergie, viz def. \ref{def:stig}) s využitím feromonových stop, které slouží jako druh
+pozitivní zpětné vazby. Tyto techniky se začali rozšiřovat počátkem devadesátých let dvacátého století.
 
 \subsubsection{Princip}
 Základní princip bude ukázán na prvním algoritmu, který byl v rámci ACO uveden -- {\it Ant System} (AS), a také
-na prvním problému, k jehož řešení byl použit -- problém obchodního cestujícího (TSP). Algoritmus vychází z modelu
-chování reálných mravenců, který byl uveden v kapitole \ref{sub:biolzakl} a zejména na obrázku \ref{fig:aco}.
-%Rozdíl oproti reálným mravencům...
+na prvním problému, k jehož řešení byl použit -- problém obchodního cestujícího (TSP).
+
+Algoritmus vychází z modelu chování reálných mravenců, který byl uveden v kapitole \ref{sub:biolzakl} a zejména
+na obrázku \ref{fig:aco}. Oproti reálným mravencům je ale zavedeno několik modifikací:
+\begin{itemize}
+  \item diskretizace světa -- reprezentace většinou grafem; mravenci se pohybují synchronně v iteracích,
+  \item mravenci mají paměť -- vnitřní stavy,
+  \item umělí mravenci nejsou zcela slepí -- můžou se rozhodovat na základě dalších kritérií,
+  \item umělí mravenci zanechávají feromon jen při cestě zpátky do hnízda, množství zanechaného feromonu bývá
+        funkcí kvality nalezeného řešení; 
+  \item některá vnější vylepšení -- lokální optimalizace, backtracking.
+\end{itemize}
 
 
 
-%Pro implementaci algoritmů ASO je prvním krokem nejprve diskretizovat a zjednodušit model chování reálných
-%mravenců, který byl uveden v kapitole \ref{sub:biolzakl} a zejména na obrázku \ref{fig:aco}.
-
-...
 
 \subsubsection{Popis metaheuristiky}
 Metaheuristika 
@@ -367,12 +373,17 @@ Metaheuristika
 
 
 \subsubsection{Další algoritmy}
-Do kategorie ACO, jakožto metaheuristiky, spadá mnoho různých algoritmů, které se většinou liší hlavně způsobem aktualizace feromonové stopy. Zde jsou uvedeny dvě nejúspěšnější varianty. Obsáhlejší seznam dalších algoritmů
-lze nalézt například v \cite{Dorigo06antcolony}.
+Do kategorie ACO, jakožto metaheuristiky, spadá mnoho různých algoritmů, které mají podobný základ. Většinou se
+liší hlavně způsobem aktualizace feromonové stopy, čímž přináší různá vylepšení. Jako příklad můžeme uvést
+varianty {\it $\mathcal{MAX-MIN}$ Ant System} ($\mathcal{MM}$AS), {\it Ant Colony System} (ACS) či
+{\it Rank-based AS} (RAS). Obsáhlejší seznam dalších algoritmů, s podrobnějším popisem prvních dvou zmiňovaných
+a odkazy na literaturu, lze nalézt například v \cite{Dorigo06antcolony}.
+
+
 
 %\paragraph{Ant System (AS)} {(důkaz konvergence u TSP)}
-\paragraph{$\mathcal{MAX-MIN}$ Ant System ($\mathcal{MM}$AS)} {...}
-\paragraph{Ant Colony System(ACS)} {...}
+%\paragraph{$\mathcal{MAX-MIN}$ Ant System ($\mathcal{MM}$AS)} {...}
+%\paragraph{Ant Colony System(ACS)} {...}
 
 
 \subsubsection{Využití}
@@ -380,12 +391,12 @@ Z klasických NP-těžkých optimalizačních problému můžeme kromě TSP jmen
 barvení grafů, problém maximální kliky v grafu či problém směrování vozidel ({\it vehicle routing problem}).
 Praktické aplikace obsahují například
 umisťování součástek v návrhu obvodů, směrování v komunikačních sítích a jejich návrh, či různé problémy
-z bioinformatiky.
+z bioinformatiky. Mnoho dalších aplikací s odkazy na zdroje lze nalézt v \cite{Blum08SwarmOpt}.
 Výhodou oproti jiným metodám, jako je například {\it simulované žíhání} či {\it genetické algoritmy}, je
 schopnost dynamické optimalizace -- graf se mění v čase a algoritmy ACO se na tyto změny dokáží v reálném
 čase adaptovat.
 
-Algoritmy ACO sloužily původně k řešení diskrétních optimalizačních problémů. Čím dál větší pozornost je
+Algoritmy ACO sloužily původně k řešení diskrétních optimalizačních problémů. Stále větší pozornost je
 ale věnována jejich adaptaci i na spojité optimalizační problémy (například {\it Continous ACO}).
 Avšak tyto přístupy se od původní metody konceptuálně velmi liší.
 
@@ -493,7 +504,7 @@ specializované aplikace, jako je {\it reactive power and voltage
 control}\footnote{\url{http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=00898095}},
 {\it biomedical image registration}\footnote{\url{http://pdf.aminer.org/001/098/431/an_approach_to_multimodal_biomedical_image_registration_utilizing_particle_swarm.pdf}},
 či například i komponování hudby. V posledních letech byly metody PSO (jejich varianty) oblíbené také ve víceúčelové
-a dynamické optimalizaci.
+a dynamické optimalizaci. Mnoho dalších aplikací s odkazy na zdroje lze nalézt v \cite{Blum08SwarmOpt}.
 %TODO metody cesky (jak prelozit?), jeste metody upravit (zobecnit apod)
 
 \subsection{Další metody}
